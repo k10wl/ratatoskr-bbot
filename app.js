@@ -4,10 +4,12 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN
+const TELEGRAM_CHANNEL = process.env.TELEGRAM_CHANNEL
+const TELEGRAM_ADMIN_ID = process.env.TELEGRAM_ADMIN_ID
 
 const config = {
   TOKEN: TELEGRAM_TOKEN,
-  redirectTo: "-1001336278388",
+  redirectTo: TELEGRAM_CHANNEL,
   router: [{
     name: "Путник, что ты хочешь передать?",
     action: "mm",
@@ -41,7 +43,7 @@ const bot = new Telegraf(config.TOKEN)
 
 bot.catch((err) => console.log(err))
 bot.command("slomano", (ctx) => {
-  ctx.telegram.sendMessage("510632907", "Плохие вести! Что то сломалось!")
+  ctx.telegram.sendMessage(TELEGRAM_ADMIN_ID, "Плохие вести! Что то сломалось!")
 })
 
 bot.action("cancel", async (ctx) => {
@@ -52,6 +54,7 @@ bot.action("cancel", async (ctx) => {
 
 bot.action("apply-tags", async (ctx) => {
   try {
+    await ctx.answerCbQuery()
     return await ctx.telegram.editMessageCaption(
       ctx.update.callback_query.message.chat.id,
       ctx.update.callback_query.message.message_id - 1,
@@ -59,7 +62,6 @@ bot.action("apply-tags", async (ctx) => {
       selectedTags.filter((tag) => !tag.match("_")).join("\n")
     );
   } catch (err) {console.log(err)}
-  await ctx.answerCbQuery()
 })
 
 bot.action("post", async (ctx) => {
