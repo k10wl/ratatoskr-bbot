@@ -1,4 +1,4 @@
-const tagList = [
+module.exports = [
   {
     name: "Жидкости, следы, фетиши",
     groupTags: [
@@ -133,5 +133,3 @@ const tagList = [
     ]
   },
 ];
-
-export default tagList
