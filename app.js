@@ -1,14 +1,17 @@
-import { Telegraf, Markup } from "telegraf";
-import { tagList } from "./src/tagList.cjs";
-import dotenv from "dotenv"
-dotenv.config()
+const { Telegraf, Markup } = require('telegraf');
+const tagList = require('./src/tagList')
+const express = require('express');
+const expressApp = express();
 
-const API_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_CHANNEL = process.env.TELEGRAM_CHANNEL;
-const TELEGRAM_ADMIN_ID = process.env.TELEGRAM_ADMIN_ID;
-const PORT = process.env.PORT;
-const URL = process.env.URL;
+const TELEGRAM_ADMIN_ID = process.env.TELEGRAM_ADMIN_ID
+const API_TOKEN = process.env.API_TOKEN || '';
+const PORT = process.env.PORT || 3000;
+const URL = process.env.URL || 'https://ratatoskr-bbot.herokuapp.com';
 
+const bot = new Telegraf(API_TOKEN);
+bot.telegram.setWebhook(`${URL}/bot${API_TOKEN}`);
+expressApp.use(bot.webhookCallback(`/bot${API_TOKEN}`));
 
 const config = {
   TOKEN: API_TOKEN,
@@ -42,11 +45,6 @@ const config = {
 };
 let selectedTags = [];
 
-const bot = new Telegraf(config.TOKEN)
-bot.telegram.setWebhook(`${URL}/bot${API_TOKEN}`);
-bot.startWebhook(`/bot${API_TOKEN}`, null, PORT)
-
-bot.catch((err) => console.log(err))
 bot.command("slomano", (ctx) => {
   ctx.telegram.sendMessage(TELEGRAM_ADMIN_ID, "Плохие вести! Что то сломалось!")
 })
@@ -277,6 +275,10 @@ bot.on("message", (ctx) => {
     "Лучше отправь мне фото/видео/анимацию. Либо скинь мне пост")
 })
 
-bot.launch()
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
+expressApp.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+expressApp.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

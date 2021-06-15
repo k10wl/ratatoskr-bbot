@@ -1,4 +1,4 @@
-exports.tagList = [
+const tagList = [
   {
     name: "Жидкости, следы, фетиши",
     groupTags: [
@@ -133,3 +133,5 @@ exports.tagList = [
     ]
   },
 ];
+
+export default tagList
