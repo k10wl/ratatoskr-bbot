@@ -3,12 +3,15 @@ import { tagList } from "./src/tagList.cjs";
 import dotenv from "dotenv"
 dotenv.config()
 
-const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN
-const TELEGRAM_CHANNEL = process.env.TELEGRAM_CHANNEL
-const TELEGRAM_ADMIN_ID = process.env.TELEGRAM_ADMIN_ID
+const API_TOKEN = process.env.TELEGRAM_TOKEN;
+const TELEGRAM_CHANNEL = process.env.TELEGRAM_CHANNEL;
+const TELEGRAM_ADMIN_ID = process.env.TELEGRAM_ADMIN_ID;
+const PORT = process.env.PORT;
+const URL = process.env.URL;
+
 
 const config = {
-  TOKEN: TELEGRAM_TOKEN,
+  TOKEN: API_TOKEN,
   redirectTo: TELEGRAM_CHANNEL,
   router: [{
     name: "Путник, что ты хочешь передать?",
@@ -40,6 +43,8 @@ const config = {
 let selectedTags = [];
 
 const bot = new Telegraf(config.TOKEN)
+bot.telegram.setWebhook(`${URL}/bot${API_TOKEN}`);
+bot.startWebhook(`/bot${API_TOKEN}`, null, PORT)
 
 bot.catch((err) => console.log(err))
 bot.command("slomano", (ctx) => {
@@ -273,3 +278,5 @@ bot.on("message", (ctx) => {
 })
 
 bot.launch()
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))

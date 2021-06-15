@@ -5,7 +5,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "micro-bot",
+    "start": "app.js",
     "watch": "nodemon"
   },
   "keywords": [],
