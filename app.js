@@ -53,18 +53,17 @@ bot.action("cancel", async (ctx) => {
   await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
   await ctx.deleteMessage(ctx.update.callback_query.message.message_id - 1);
   selectedTags.splice(0, selectedTags.length);
-  return await ctx.answerCbQuery();
 });
 
 bot.action("apply-tags", async (ctx) => {
   try {
-    await ctx.telegram.editMessageCaption(
+    await ctx.answerCbQuery()
+    return await ctx.telegram.editMessageCaption(
       ctx.update.callback_query.message.chat.id,
       ctx.update.callback_query.message.message_id - 1,
       undefined,
       selectedTags.filter((tag) => !tag.match("_")).join("\n")
     );
-    return await ctx.answerCbQuery()
   } catch (err) {console.log(err)}
 })
 
@@ -76,7 +75,6 @@ bot.action("post", async (ctx) => {
   )
   await ctx.editMessageText("Уже бегу передавать! До скорой встречи!")
   await setTimeout(() => ctx.deleteMessage(), 5000)
-  return await ctx.answerCbQuery()
 })
 
 const createNavigationActions = (location) => {
@@ -112,12 +110,11 @@ const createSelectedTagsActions = (selectedTagsArray) => {
   const route = "mmtmst"
   return selectedTagsArray.forEach((tag, index) => {
     const trigger = route + tag
-    return bot.action(trigger, async (ctx) => {
-      await selectedTags[index] = `${!tag.match("_") ? tag + "_" : tag.replace("_", "")}`
-      await ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
+    return bot.action(trigger, (ctx) => {
+      selectedTags[index] = `${!tag.match("_") ? tag + "_" : tag.replace("_", "")}`
+      ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
         [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
       ))
-      return await ctx.answerCbQuery()
     })
   })
 }
@@ -125,9 +122,8 @@ const createSelectedTagsActions = (selectedTagsArray) => {
 const createTagGroupActions = (tagArray) => {
   return tagArray.map((group, groupIndex) => {
     const route = "mmtmtg"
-    return bot.action(normalizedAction(route, groupIndex), async (ctx) => {
-      await ctx.editMessageText(group.name, displayMenuNavigation({action: normalizedAction(route, groupIndex)}))
-      return await ctx.answerCbQuery()
+    return bot.action(normalizedAction(route, groupIndex), (ctx) => {
+      ctx.editMessageText(group.name, displayMenuNavigation({action: normalizedAction(route, groupIndex)}))
     })
   })
 }
@@ -138,14 +134,13 @@ const createTagActions = (tagArray) => {
     return group.groupTags.map((tag, index) => {
       const action = normalizedAction("mmtmtg", groupIndex)
       const trigger = normalizedAction(action, index)
-      return bot.action(trigger, async (ctx) => {
+      return bot.action(trigger, (ctx) => {
         if (selectedTags.includes(tag)) {
           selectedTags = selectedTags.filter((filter) => tag !== filter)
         } else {
           selectedTags.push(tag)
         }
-        await ctx.editMessageText(group.name, displayMenuNavigation({ action: action }))
-        return await ctx.answerCbQuery()
+        ctx.editMessageText(group.name, displayMenuNavigation({ action: action }))
       })
     })
   })
