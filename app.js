@@ -116,8 +116,6 @@ const createSelectedTagsActions = (selectedTagsArray) => {
       } else {
         selectedTags.splice(selectedTagsArray.indexOf(tag), 0, tag)
       }
-      console.log(selectedTags)
-      console.log(selectedTagsArray)
       const tabName = config.router[0].children[0].children[1].name
       ctx.editMessageText(tabName, Markup.inlineKeyboard(
         [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
@@ -286,7 +284,6 @@ bot.on("animation", (ctx) => {
 })
 
 bot.on("message", (ctx) => {
-  console.log(ctx.message)
   ctx.reply("Я не могу такое передавать" + "\n" +
     "Лучше отправь мне фото/видео/анимацию. Либо скинь мне пост")
 })
