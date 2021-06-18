@@ -21,7 +21,7 @@ const config = {
     action: "mm",
     children: [
       {
-        name: "Хочу уточним темы",
+        name: "Уточним темы",
         action: "mmtm",
         children: [
           {
@@ -49,51 +49,6 @@ bot.command("slomano", (ctx) => {
   ctx.telegram.sendMessage(TELEGRAM_ADMIN_ID, "Плохие вести! Что то сломалось!")
 })
 
-bot.action("cancel", async (ctx) => {
-  await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
-  await ctx.deleteMessage(ctx.update.callback_query.message.message_id - 1);
-  selectedTags.splice(0, selectedTags.length);
-});
-
-bot.action("apply-tags", async (ctx) => {
-  try {
-    await ctx.answerCbQuery()
-    return await ctx.telegram.editMessageCaption(
-      ctx.update.callback_query.message.chat.id,
-      ctx.update.callback_query.message.message_id - 1,
-      undefined,
-      selectedTags.filter((tag) => !tag.match("_")).join("\n")
-    );
-  } catch (err) {console.log(err)}
-})
-
-bot.action("post", async (ctx) => {
-  await ctx.telegram.copyMessage(
-    config.redirectTo,
-    ctx.update.callback_query.message.chat.id,
-    ctx.update.callback_query.message.message_id - 1
-  )
-  await ctx.editMessageText("Уже бегу передавать! До скорой встречи!")
-  await setTimeout(() => ctx.deleteMessage(), 5000)
-})
-
-const createNavigationActions = (location) => {
-  return location.map((trigger) => {
-    if (trigger.children) {
-      createNavigationActions(trigger.children)
-    }
-    if (trigger.action.match(/^mmme$/)){
-      return bot.action(trigger.action, (ctx) => {
-        ctx.editMessageText(trigger.about, displayMenuNavigation(trigger))
-      })
-    }
-    return bot.action(trigger.action, (ctx) => {
-      ctx.editMessageText(trigger.name, displayMenuNavigation(trigger))
-    })
-  })
-}
-createNavigationActions(config.router)
-
 const normalizedAction = (route, index) => {
   let action
   if (index < 9) {
@@ -106,11 +61,61 @@ const normalizedAction = (route, index) => {
   return action
 }
 
+bot.action("cancel", async (ctx) => {
+  ctx.answerCbQuery()
+  await ctx.deleteMessage(ctx.update.callback_query.message.message_id);
+  await ctx.deleteMessage(ctx.update.callback_query.message.message_id - 1);
+  selectedTags.splice(0, selectedTags.length);
+});
+
+bot.action("apply-tags", (ctx) => {
+  try {
+    ctx.answerCbQuery()
+    ctx.telegram.editMessageCaption(
+      ctx.update.callback_query.message.chat.id,
+      ctx.update.callback_query.message.message_id - 1,
+      undefined,
+      selectedTags.filter((tag) => !tag.match("_")).join("\n")
+    );
+  } catch (err) {console.log(err)}
+})
+
+bot.action("post", async (ctx) => {
+  ctx.answerCbQuery()
+  await ctx.telegram.copyMessage(
+    config.redirectTo,
+    ctx.update.callback_query.message.chat.id,
+    ctx.update.callback_query.message.message_id - 1
+  )
+  await ctx.editMessageText("Уже бегу передавать!")
+  await setTimeout(() => ctx.deleteMessage(), 5000)
+})
+
+const createNavigationActions = (location) => {
+  return location.map((trigger) => {
+    if (trigger.children) {
+      createNavigationActions(trigger.children)
+    }
+    if (trigger.action.match(/^mmme$/)){
+      return bot.action(trigger.action, (ctx) => {
+        ctx.answerCbQuery()
+        ctx.editMessageText(trigger.about, displayMenuNavigation(trigger))
+      })
+    }
+    return bot.action(trigger.action, (ctx) => {
+      ctx.answerCbQuery()
+      ctx.editMessageText(trigger.name, displayMenuNavigation(trigger))
+    })
+  })
+}
+createNavigationActions(config.router)
+
 const createSelectedTagsActions = (selectedTagsArray) => {
   const route = "mmtmst"
   return selectedTagsArray.forEach((tag, index) => {
     const trigger = route + tag
     return bot.action(trigger, (ctx) => {
+      ctx.answerCbQuery()
       selectedTags[index] = `${!tag.match("_") ? tag + "_" : tag.replace("_", "")}`
       ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
         [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
@@ -123,6 +128,7 @@ const createTagGroupActions = (tagArray) => {
   return tagArray.map((group, groupIndex) => {
     const route = "mmtmtg"
     return bot.action(normalizedAction(route, groupIndex), (ctx) => {
+      ctx.answerCbQuery()
       ctx.editMessageText(group.name, displayMenuNavigation({action: normalizedAction(route, groupIndex)}))
     })
   })
@@ -135,6 +141,7 @@ const createTagActions = (tagArray) => {
       const action = normalizedAction("mmtmtg", groupIndex)
       const trigger = normalizedAction(action, index)
       return bot.action(trigger, (ctx) => {
+        ctx.answerCbQuery()
         if (selectedTags.includes(tag)) {
           selectedTags = selectedTags.filter((filter) => tag !== filter)
         } else {
