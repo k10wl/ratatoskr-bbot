@@ -44,6 +44,7 @@ const config = {
   checkedTagMark: " \u{1F330}",
 };
 let selectedTags = [];
+let selectedTagsTab = []
 
 bot.command("slomano", (ctx) => {
   ctx.telegram.sendMessage(TELEGRAM_ADMIN_ID, "Плохие вести! Что то сломалось!")
@@ -172,9 +173,9 @@ const displayMenuNavigation = (location = {children: null, action: null}) => {
     }
   }
   if (location.action.match(/^mmtmst$/)) {
-    selectedTags = selectedTags.filter((tag) => !tag.match("_"))
-    createSelectedTagsActions(selectedTags)
-    normalizedButtons = displaySelectedTags(selectedTags)
+    selectedTagsTab = selectedTags.slice()
+    createSelectedTagsActions(selectedTagsTab)
+    normalizedButtons = displaySelectedTags(selectedTagsTab)
   }
   if (location.action.match(/^mmtmtg$/)) {
     normalizedButtons = displayTagGroupNavigation(location.action)
@@ -199,8 +200,13 @@ const displayMenuNavigation = (location = {children: null, action: null}) => {
 const displaySelectedTags = (selectedTagsArray) => {
   const route = "mmtmst";
   return selectedTagsArray.map((tag) => {
-    const action = route + tag.replace("_", "")
-    const displayTag = `${!tag.match(/_/) ? tag + config.checkedTagMark : tag.replace("_", "")}`
+    let displayTag
+    if (selectedTags.includes(tag)) {
+      displayTag = tag.concat(config.checkedTagMark)
+    } else {
+      displayTag = tag
+    }
+    const action = route + tag
     return [Markup.button.callback(displayTag, action)]
   })
 }
