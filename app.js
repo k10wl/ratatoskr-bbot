@@ -117,8 +117,8 @@ const createSelectedTagsActions = (selectedTagsArray) => {
     const trigger = route + tag
     return bot.action(trigger, (ctx) => {
       ctx.answerCbQuery()
+      selectedTags = selectedTags.filter((filter) => filter !== tag)
       console.log(selectedTags)
-      selectedTags = selectedTags.filter((filter) => tag !== filter)
       ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
         [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
       ))
@@ -202,7 +202,7 @@ const displaySelectedTags = (selectedTagsArray) => {
   return selectedTagsArray.map((tag) => {
     let displayTag
     if (selectedTags.includes(tag)) {
-      displayTag = tag.concat(config.checkedTagMark)
+      displayTag = tag.concat(" - SELECTED")
     } else {
       displayTag = tag
     }
