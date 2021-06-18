@@ -113,14 +113,13 @@ createNavigationActions(config.router)
 
 const createSelectedTagsActions = (selectedTagsArray) => {
   const route = "mmtmst"
-  return selectedTagsArray.forEach((tag, index) => {
+  return selectedTagsArray.forEach((tag) => {
     const trigger = route + tag
     return bot.action(trigger, (ctx) => {
       ctx.answerCbQuery()
-      selectedTags[index] = `${!tag.match("_") ? tag + "_" : tag.replace("_", "")}`
       console.log(selectedTags)
       ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
-        [...displaySelectedTags(selectedTags), [backButton("mmtmst"), applyTags]]
+        [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
       ))
     })
   })
