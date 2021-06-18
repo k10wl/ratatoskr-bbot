@@ -119,7 +119,7 @@ const createSelectedTagsActions = (selectedTagsArray) => {
       selectedTags[index] = `${!tag.match("_") ? tag + "_" : tag.replace("_", "")}`
       console.log(selectedTags)
       ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
-        [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
+        [...displaySelectedTags(selectedTags), [backButton("mmtmst"), applyTags]]
       ))
     })
   })
