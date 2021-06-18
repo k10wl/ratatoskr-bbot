@@ -21,7 +21,7 @@ const config = {
     action: "mm",
     children: [
       {
-        name: "Уточним темы",
+        name: "Уточним теги",
         action: "mmtm",
         children: [
           {
@@ -34,20 +34,20 @@ const config = {
           }
         ]
       },
-      {
-        name: "Давай познакомимся",
-        about: "Я запомню всё что ты мне скажешь и быстро передам всё, что позволишь передать \n \n Мы легко найдём общий язык с;",
-        action: "mmme"
-      }
     ],
   }],
   checkedTagMark: " \u{1F330}",
 };
 let selectedTags = [];
-let selectedTagsTab = []
 
-bot.command("slomano", (ctx) => {
-  ctx.telegram.sendMessage(TELEGRAM_ADMIN_ID, "Плохие вести! Что то сломалось!")
+bot.command("about", (ctx) => {
+  ctx.reply("Привет, меня зовут Рататоск" + "\n" +
+    "Моя задача - помочь тебе выбрать теги и передать пост в нашу группу" + "\n" + "\n" +
+    "Чтобы начать скинь мне картинку/видео/гифку")
+})
+bot.command("slomano", async (ctx) => {
+  await ctx.telegram.sendMessage(TELEGRAM_ADMIN_ID, "Плохие вести! Что то сломалось!")
+  await ctx.reply("Админ оповещён")
 })
 
 const normalizedAction = (route, index) => {
@@ -97,12 +97,6 @@ const createNavigationActions = (location) => {
     if (trigger.children) {
       createNavigationActions(trigger.children)
     }
-    if (trigger.action.match(/^mmme$/)){
-      return bot.action(trigger.action, (ctx) => {
-        ctx.answerCbQuery()
-        ctx.editMessageText(trigger.about, displayMenuNavigation(trigger))
-      })
-    }
     return bot.action(trigger.action, (ctx) => {
       ctx.answerCbQuery()
       ctx.editMessageText(trigger.name, displayMenuNavigation(trigger))
@@ -117,9 +111,15 @@ const createSelectedTagsActions = (selectedTagsArray) => {
     const trigger = route + tag
     return bot.action(trigger, (ctx) => {
       ctx.answerCbQuery()
-      selectedTags = selectedTags.filter((filter) => filter !== tag)
+      if (selectedTags.includes(tag)) {
+        selectedTags = selectedTags.filter((filter) => filter !== tag)
+      } else {
+        selectedTags.splice(selectedTagsArray.indexOf(tag), 0, tag)
+      }
       console.log(selectedTags)
-      ctx.editMessageText(config.router[0].children[0].children[1].name, Markup.inlineKeyboard(
+      console.log(selectedTagsArray)
+      const tabName = config.router[0].children[0].children[1].name
+      ctx.editMessageText(tabName, Markup.inlineKeyboard(
         [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
       ))
     })
@@ -161,8 +161,8 @@ const backButton = (action) => {
   return Markup.button.callback("Вернёмся назад", action.slice(0, num))
 }
 const cancel = Markup.button.callback("Ничего, забудь", "cancel")
-const post = Markup.button.callback("Расскажи всем!", "post")
-const applyTags = Markup.button.callback("Да, запомни темы", "apply-tags")
+const post = Markup.button.callback("Передай пост", "post")
+const applyTags = Markup.button.callback("Запомни теги", "apply-tags")
 
 const displayMenuNavigation = (location = {children: null, action: null}) => {
   const {children, action} = location
@@ -173,9 +173,8 @@ const displayMenuNavigation = (location = {children: null, action: null}) => {
     }
   }
   if (location.action.match(/^mmtmst$/)) {
-    selectedTagsTab = selectedTags.slice()
-    createSelectedTagsActions(selectedTagsTab)
-    normalizedButtons = displaySelectedTags(selectedTagsTab)
+    createSelectedTagsActions(selectedTags.slice())
+    normalizedButtons = displaySelectedTags(selectedTags.slice())
   }
   if (location.action.match(/^mmtmtg$/)) {
     normalizedButtons = displayTagGroupNavigation(location.action)
@@ -202,7 +201,7 @@ const displaySelectedTags = (selectedTagsArray) => {
   return selectedTagsArray.map((tag) => {
     let displayTag
     if (selectedTags.includes(tag)) {
-      displayTag = tag.concat(" - SELECTED")
+      displayTag = tag.concat(config.checkedTagMark)
     } else {
       displayTag = tag
     }
@@ -257,19 +256,6 @@ bot.on("photo", (ctx) => {
   }
 });
 
-bot.on("animation", (ctx) => {
-  cancelDueToTimeout(ctx)
-  const animationId = ctx.message.animation.file_id;
-  timeoutsArray.push(
-    setTimeout(async () => {
-      await ctx.deleteMessage(ctx.message.message_id)
-      await ctx.replyWithAnimation(animationId)
-      await ctx.reply(config.router[0].name, displayMenuNavigation(...config.router))
-      mediaArray.splice(0, mediaArray.length)
-    })
-  )
-})
-
 bot.on("video", (ctx) => {
   cancelDueToTimeout(ctx)
   const videoId = ctx.message.video.file_id;
@@ -279,13 +265,29 @@ bot.on("video", (ctx) => {
       await ctx.replyWithVideo(videoId)
       await ctx.reply(config.router[0].name, displayMenuNavigation(...config.router))
       mediaArray.splice(0, mediaArray.length)
-    })
+    }, 1)
+  )
+  for (let i = 0; timeoutsArray.length - 1 > i; i++) {
+    clearTimeout(timeoutsArray[i])
+  }
+})
+
+bot.on("animation", (ctx) => {
+  cancelDueToTimeout(ctx)
+  const animationId = ctx.message.animation.file_id;
+  timeoutsArray.push(
+    setTimeout(async () => {
+      await ctx.deleteMessage(ctx.message.message_id)
+      await ctx.replyWithAnimation(animationId)
+      await ctx.reply(config.router[0].name, displayMenuNavigation(...config.router))
+      mediaArray.splice(0, mediaArray.length)
+    }, 1)
   )
 })
 
 bot.on("message", (ctx) => {
   console.log(ctx.message)
-  ctx.reply("Не уверен, что я могу такое передавать... не будем рисковать \n" +
+  ctx.reply("Я не могу такое передавать" + "\n" +
     "Лучше отправь мне фото/видео/анимацию. Либо скинь мне пост")
 })
 
