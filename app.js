@@ -39,6 +39,7 @@ const config = {
   checkedTagMark: " \u{1F330}",
 };
 let selectedTags = [];
+let selectedTagsTab = [];
 
 bot.command("about", (ctx) => {
   ctx.reply("Привет, меня зовут Рататоск" + "\n" +
@@ -114,11 +115,11 @@ const createSelectedTagsActions = (selectedTagsArray) => {
       if (selectedTags.includes(tag)) {
         selectedTags = selectedTags.filter((filter) => filter !== tag)
       } else {
-        selectedTags.splice(selectedTagsArray.indexOf(tag), 0, tag)
+        selectedTags.splice(selectedTagsTab.indexOf(tag), 0, tag)
       }
       const tabName = config.router[0].children[0].children[1].name
       ctx.editMessageText(tabName, Markup.inlineKeyboard(
-        [...displaySelectedTags(selectedTagsArray), [backButton("mmtmst"), applyTags]]
+        [...displaySelectedTags(selectedTagsTab), [backButton("mmtmst"), applyTags]]
       ))
     })
   })
@@ -171,8 +172,10 @@ const displayMenuNavigation = (location = {children: null, action: null}) => {
     }
   }
   if (location.action.match(/^mmtmst$/)) {
-    createSelectedTagsActions(selectedTags.slice())
-    normalizedButtons = displaySelectedTags(selectedTags.slice())
+    selectedTagsTab.length = 0
+    selectedTagsTab = selectedTags.slice()
+    createSelectedTagsActions(selectedTagsTab)
+    normalizedButtons = displaySelectedTags(selectedTagsTab)
   }
   if (location.action.match(/^mmtmtg$/)) {
     normalizedButtons = displayTagGroupNavigation(location.action)
