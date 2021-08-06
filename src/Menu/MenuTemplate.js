@@ -42,12 +42,10 @@ class MenuTemplate {
       buttonsCopy.reverse();
     }
     const updateButtons = menuLike(this.body, this.submenus, buttonsCopy);
-    ctx.telegram.editMessageText(
-      chatId,
-      messageId,
-      messageId,
-      ...updateButtons
-    );
+    ctx.telegram
+      .editMessageText(chatId, messageId, messageId, ...updateButtons)
+      // eslint-disable-next-line no-console
+      .catch((e) => console.log(e));
   }
 
   clearButtons(ctx = null) {

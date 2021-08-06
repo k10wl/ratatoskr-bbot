@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { Telegraf } = require("telegraf");
 const MenuMiddleware = require("./src/Menu/MenuMiddleware");
 const MenuTemplate = require("./src/Menu/MenuTemplate");
@@ -10,13 +11,13 @@ const { HandleMessage } = require("./src/HandleMessage");
 const CONFIG = require("./src/config");
 
 const bot = new Telegraf(CONFIG.BOT_API_TOKEN);
-bot.telegram.setWebhook(`${CONFIG.URL}/bot${CONFIG.BOT_API_TOKEN}`);
+bot.telegram
+  .setWebhook(`${CONFIG.URL}/bot${CONFIG.BOT_API_TOKEN}`)
+  .catch((e) => console.log(e));
 // noinspection JSAccessibilityCheck
 bot.startWebhook(`/bot${CONFIG.BOT_API_TOKEN}`, null, CONFIG.PORT);
-// eslint-disable-next-line no-console
 bot.catch((err) => console.log(err));
 
-// eslint-disable-next-line no-console
 bot.launch().then(() => console.log("\nBot: Ready to work\n"));
 
 const mainMenu = new MenuTemplate("Что ты хочешь передать?");
@@ -48,13 +49,17 @@ bot.action("save", (ctx) => {
   const messageId = ctx.update.callback_query.message.message_id;
   const mediaIdArray = botMessage.get(chatId).get(messageId);
   if (mediaIdArray.slice(0, -1).length === 1) {
-    ctx.telegram.copyMessage(CONFIG.TELEGRAM_CHANNEL, chatId, messageId - 1);
+    ctx.telegram
+      .copyMessage(CONFIG.TELEGRAM_CHANNEL, chatId, messageId - 1)
+      .catch((e) => console.log(e));
   } else {
     const mediaArray = mediaIdArray.slice(-1);
     mediaArray[0][0].caption = [
       ...selectedTagsMap.relativeMessageSet(ctx),
     ].join("\n");
-    ctx.telegram.sendMediaGroup(CONFIG.TELEGRAM_CHANNEL, ...mediaArray);
+    ctx.telegram
+      .sendMediaGroup(CONFIG.TELEGRAM_CHANNEL, ...mediaArray)
+      .catch((e) => console.log(e));
   }
   ctx.deleteMessage();
   botMessage.get(chatId).delete(messageId);
