@@ -14,7 +14,7 @@ module.exports = [
       "#lingerie",
       "#latex",
       "#fuck_u_leatherman",
-    ]
+    ],
   },
   {
     name: "Практики",
@@ -41,8 +41,8 @@ module.exports = [
       "#knifeplay",
       "#fingering",
       "#rubbing",
-      "#bite"
-    ]
+      "#bite",
+    ],
   },
   {
     name: "Девайсы, предметы",
@@ -63,16 +63,12 @@ module.exports = [
       "#fork ",
       "#chastitybelt ",
       "#bamboo",
-      "#ridingcrop"
-    ]
+      "#ridingcrop",
+    ],
   },
   {
     name: "Процесс",
-    groupTags: [
-      "#aftercare",
-      "#dominance",
-      "#submission"
-    ]
+    groupTags: ["#aftercare", "#dominance", "#submission"],
   },
   {
     name: "Дополнительно",
@@ -85,8 +81,8 @@ module.exports = [
       "#butt",
       "#legs",
       "#plants",
-      "#toys"
-    ]
+      "#toys",
+    ],
   },
   {
     name: "Участники",
@@ -109,27 +105,19 @@ module.exports = [
       "#robertpattinson",
       "#damianodavid",
       "#heisenberg",
-      "#RE8"
-    ]
+      "#RE8",
+    ],
   },
   {
     name: "Кинклист",
-    groupTags: [
-      "#kinklist"
-    ]
+    groupTags: ["#kinklist"],
   },
   {
     name: "Фотокниги",
-    groupTags: [
-      "#photobook",
-      "#polaroid"
-    ]
+    groupTags: ["#photobook", "#polaroid"],
   },
   {
     name: "Мемесы",
-    groupTags: [
-      "#memes",
-      "#длясправочек"
-    ]
+    groupTags: ["#memes", "#длясправочек"],
   },
 ];
