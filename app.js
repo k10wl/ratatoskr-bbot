@@ -14,12 +14,11 @@ const CONFIG = require("./src/config");
 const expressApp = express();
 
 const bot = new Telegraf(CONFIG.BOT_API_TOKEN);
+console.log(`${CONFIG.URL}/bot${CONFIG.BOT_API_TOKEN}`);
 bot.telegram
   .setWebhook(`${CONFIG.URL}/bot${CONFIG.BOT_API_TOKEN}`)
   .catch((e) => console.log(e));
 expressApp.use(bot.webhookCallback(`/bot${CONFIG.BOT_API_TOKEN}`));
-
-bot.launch().then(() => console.log("\nBot: Ready to work\n"));
 
 const mainMenu = new MenuTemplate("Что ты хочешь передать?");
 const tagsList = new MenuTemplate("Теги");
