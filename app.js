@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const { Telegraf } = require("telegraf");
+const express = require("express");
 const MenuMiddleware = require("./src/Menu/MenuMiddleware");
 const MenuTemplate = require("./src/Menu/MenuTemplate");
 const createTagsMenu = require("./src/tagsManagement/createTagsMenu");
@@ -10,13 +11,13 @@ const { addTagsToMessage } = require("./src/actionHive");
 const { HandleMessage } = require("./src/HandleMessage");
 const CONFIG = require("./src/config");
 
+const expressApp = express();
+
 const bot = new Telegraf(CONFIG.BOT_API_TOKEN);
 bot.telegram
   .setWebhook(`${CONFIG.URL}/bot${CONFIG.BOT_API_TOKEN}`)
   .catch((e) => console.log(e));
-// noinspection JSAccessibilityCheck
-bot.startWebhook(`/bot${CONFIG.BOT_API_TOKEN}`, null, CONFIG.PORT);
-bot.catch((err) => console.log(err));
+expressApp.use(bot.webhookCallback(`/bot${CONFIG.BOT_API_TOKEN}`));
 
 bot.launch().then(() => console.log("\nBot: Ready to work\n"));
 
@@ -149,5 +150,9 @@ bot.on("message", (ctx) => {
   }, 900000);
 });
 
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));
+expressApp.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+expressApp.listen(CONFIG.PORT, () => {
+  console.log(`Server running on port ${CONFIG.PORT}`);
+});
