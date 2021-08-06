@@ -13,6 +13,8 @@ const bot = new Telegraf(CONFIG.BOT_API_TOKEN);
 bot.telegram.setWebhook(`${CONFIG.URL}/bot${CONFIG.BOT_API_TOKEN}`);
 // noinspection JSAccessibilityCheck
 bot.startWebhook(`/bot${CONFIG.BOT_API_TOKEN}`, null, CONFIG.PORT);
+// eslint-disable-next-line no-console
+bot.catch((err) => console.log(err));
 
 // eslint-disable-next-line no-console
 bot.launch().then(() => console.log("\nBot: Ready to work\n"));
