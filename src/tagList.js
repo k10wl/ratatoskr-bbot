@@ -1,4 +1,4 @@
-exports.tagList = [
+module.exports = [
   {
     name: "Жидкости, следы, фетиши",
     groupTags: [
@@ -14,7 +14,10 @@ exports.tagList = [
       "#lingerie",
       "#latex",
       "#fuck_u_leatherman",
-    ]
+      "#cum",
+      "#CDNS",
+      "#medfetish",
+    ],
   },
   {
     name: "Практики",
@@ -41,8 +44,10 @@ exports.tagList = [
       "#knifeplay",
       "#fingering",
       "#rubbing",
-      "#bite"
-    ]
+      "#bite",
+      "#nippleplay",
+      "#ruinedorgasm",
+    ],
   },
   {
     name: "Девайсы, предметы",
@@ -63,16 +68,12 @@ exports.tagList = [
       "#fork ",
       "#chastitybelt ",
       "#bamboo",
-      "#ridingcrop"
-    ]
+      "#ridingcrop",
+    ],
   },
   {
     name: "Процесс",
-    groupTags: [
-      "#aftercare",
-      "#dominance",
-      "#submission"
-    ]
+    groupTags: ["#aftercare", "#dominance", "#submission"],
   },
   {
     name: "Дополнительно",
@@ -85,8 +86,9 @@ exports.tagList = [
       "#butt",
       "#legs",
       "#plants",
-      "#toys"
-    ]
+      "#toys",
+      "#favourite",
+    ],
   },
   {
     name: "Участники",
@@ -109,27 +111,30 @@ exports.tagList = [
       "#robertpattinson",
       "#damianodavid",
       "#heisenberg",
-      "#RE8"
-    ]
+      "#RE8",
+      "#owengray",
+      "#mrsnice",
+      "#forgottenplace",
+      "#ironnettle",
+      "#tilda",
+      "#christophereccleston",
+      "#sunstone",
+      "#hannibal",
+      "#phantom_of_the_opera",
+      "#doctor_who",
+      "#K",
+    ],
   },
   {
     name: "Кинклист",
-    groupTags: [
-      "#kinklist"
-    ]
+    groupTags: ["#kinklist"],
   },
   {
     name: "Фотокниги",
-    groupTags: [
-      "#photobook",
-      "#polaroid"
-    ]
+    groupTags: ["#photobook", "#polaroid"],
   },
   {
     name: "Мемесы",
-    groupTags: [
-      "#memes",
-      "#длясправочек"
-    ]
+    groupTags: ["#memes", "#длясправочек"],
   },
 ];
