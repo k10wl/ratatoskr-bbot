@@ -1,11 +1,10 @@
+import { Debugger } from "debug";
 import { Telegraf } from "telegraf";
 
-export async function loadTelegraf(telegraf: Telegraf) {
+export async function loadTelegraf(telegraf: Telegraf, debug: Debugger) {
   try {
-    telegraf.use();
-
     await telegraf.launch();
   } catch (error) {
-    console.error(error);
+    debug(error);
   }
 }

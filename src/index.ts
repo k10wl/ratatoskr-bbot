@@ -1,5 +1,5 @@
-import "dotenv/config";
 import debugLib from "debug";
+import "dotenv/config";
 import { Telegraf } from "telegraf";
 
 import CONFIG from "./config";
@@ -10,7 +10,7 @@ const debug = debugLib("Ratatoskr:dev");
 async function startServer() {
   const telegraf = new Telegraf(CONFIG.BOT_TOKEN as string);
 
-  await loadTelegraf(telegraf);
+  await loadTelegraf(telegraf, debug);
 }
 
 void startServer()
