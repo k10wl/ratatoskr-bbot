@@ -2,9 +2,9 @@ import { Context } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
 import {
-  senderCanInteract,
+  checkInteractionPermission,
   CANT_INTERACT_MESSAGE,
-  KNOWN_USERS_ID,
+  HAS_INTERACTION_PERMISSION,
 } from "./index";
 
 const mockTgReply = jest.fn();
@@ -12,7 +12,7 @@ const mockTgContext = { reply: mockTgReply } as unknown as Context<Update>;
 const mockTgNext = jest.fn();
 
 describe("senderCanInteract", () => {
-  const middlewareFn = senderCanInteract();
+  const middlewareFn = checkInteractionPermission();
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -35,7 +35,10 @@ describe("senderCanInteract", () => {
 
   test("should only call 'next' function when user is acceptable", () => {
     void middlewareFn(
-      { ...mockTgContext, from: { id: KNOWN_USERS_ID[0] } } as Context<Update>,
+      {
+        ...mockTgContext,
+        from: { id: HAS_INTERACTION_PERMISSION[0] },
+      } as Context<Update>,
       mockTgNext
     );
     expect(mockTgNext).toBeCalled();

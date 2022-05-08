@@ -1,11 +1,11 @@
 import { Debugger } from "debug";
 import { Telegraf } from "telegraf";
 
-import { senderCanInteract } from "src/middleware";
+import { checkInteractionPermission } from "src/middleware";
 
 export async function loadTelegraf(telegraf: Telegraf, debug: Debugger) {
   try {
-    telegraf.use(senderCanInteract());
+    telegraf.use(checkInteractionPermission());
     await telegraf.launch();
   } catch (error) {
     debug("Telegraf loading error!");

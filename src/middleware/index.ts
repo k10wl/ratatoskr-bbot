@@ -1,1 +1,1 @@
-export * from "./senderCanInteract";
+export * from "./checkInteractionPermission";
