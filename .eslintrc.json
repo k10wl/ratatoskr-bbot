@@ -37,13 +37,17 @@
             "builtin",
             "external"
           ],
-          "internal",
-          [
-            "sibling",
-            "parent"
-          ]
+          "internal"
         ],
         "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "src",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
@@ -59,7 +63,8 @@
     "@typescript-eslint/no-shadow": [
       "error"
     ],
-    "@typescript-eslint/no-this-alias": "off"
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off"
   },
   "settings": {
     "import/resolver": {
