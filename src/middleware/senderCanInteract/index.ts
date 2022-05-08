@@ -12,6 +12,7 @@ export function senderCanInteract(): MiddlewareFn<Context<Update>> {
     if (ctx.from?.id && KNOWN_USERS_ID.includes(ctx.from.id)) {
       return next();
     }
+
     return ctx.reply(CANT_INTERACT_MESSAGE);
   };
 }

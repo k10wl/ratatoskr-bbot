@@ -60,6 +60,7 @@
     "@typescript-eslint/no-misused-promises": "off",
     "no-shadow": "off",
     "no-void": "off",
+    "newline-before-return": "error",
     "@typescript-eslint/no-shadow": [
       "error"
     ],
