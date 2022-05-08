@@ -1,10 +1,11 @@
 import { Context, MiddlewareFn } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
+// TODO: create service that will get all known users array from DB.
 export const KNOWN_USERS_ID: number[] = [510632907];
 
 export const CANT_INTERACT_MESSAGE =
-  "You cannot send messages to this bot. If you believe that this is a mistake - message to developers.";
+  "You dont have right to interact with Ratatoskr. If you believe that this is a mistake - message developers.";
 
 export function senderCanInteract(): MiddlewareFn<Context<Update>> {
   return (ctx, next) => {
