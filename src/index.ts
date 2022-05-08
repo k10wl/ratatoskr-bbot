@@ -1,16 +1,16 @@
-import debugLib from "debug";
 import "dotenv/config";
+import debugLib from "debug";
 import { Telegraf } from "telegraf";
 
-import CONFIG from "./config";
-import { loadTelegraf } from "./loaders/telegraf";
+import CONFIG from "src/config";
+import { loadApp } from "src/loaders";
 
-const debug = debugLib("Ratatoskr:dev");
+const debug = debugLib("Ratatoskr:DEV");
 
 async function startServer() {
   const telegraf = new Telegraf(CONFIG.BOT_TOKEN as string);
 
-  await loadTelegraf(telegraf, debug);
+  await loadApp(telegraf, debug);
 }
 
 void startServer()
