@@ -25,6 +25,7 @@ describe("Config should wary depending on NODE_ENV", () => {
     const CONFIG = require("./index").default;
 
     expect(CONFIG.BOT_TOKEN).toBe(BOT_TOKEN_MOCKS.PROD_BOT_TOKEN);
+    expect(CONFIG.DEBUG_NAMESPACE).toBeDefined();
   });
 
   test("should set PROD_BOT_TOKEN if NODE_ENV is not 'PROD'", () => {
@@ -33,5 +34,6 @@ describe("Config should wary depending on NODE_ENV", () => {
     const CONFIG = require("./index").default;
 
     expect(CONFIG.BOT_TOKEN).toBe(BOT_TOKEN_MOCKS.DEV_BOT_TOKEN);
+    expect(CONFIG.DEBUG_NAMESPACE).toBeDefined();
   });
 });

@@ -5,7 +5,7 @@ import { Telegraf } from "telegraf";
 import CONFIG from "@src/config";
 import { loadApp } from "@src/loaders";
 
-const debug = debugLib("Ratatoskr:DEV");
+const debug = debugLib(CONFIG.DEBUG_NAMESPACE);
 
 async function startServer() {
   const telegraf = new Telegraf(CONFIG.BOT_TOKEN as string);
