@@ -2,8 +2,8 @@ import "dotenv/config";
 import debugLib from "debug";
 import { Telegraf } from "telegraf";
 
-import CONFIG from "src/config";
-import { loadApp } from "src/loaders";
+import CONFIG from "@src/config";
+import { loadApp } from "@src/loaders";
 
 const debug = debugLib("Ratatoskr:DEV");
 

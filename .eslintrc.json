@@ -42,7 +42,7 @@
         "newlines-between": "always",
         "pathGroups": [
           {
-            "pattern": "src",
+            "pattern": "@src",
             "group": "internal",
             "position": "after"
           }
