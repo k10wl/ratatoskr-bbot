@@ -1,9 +1,10 @@
 import { Context } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
+import { BOT_MESSAGES } from "@src/constants";
+
 import {
   checkInteractionPermission,
-  CANT_INTERACT_MESSAGE,
   HAS_INTERACTION_PERMISSION,
 } from "./index";
 
@@ -21,7 +22,7 @@ describe("senderCanInteract", () => {
   test("should only call 'reply' function with CANT_INTERACT_MESSAGE when 'ctx.from' is not defined", () => {
     void middlewareFn(mockTgContext, mockTgNext);
     expect(mockTgNext).not.toBeCalled();
-    expect(mockTgReply).toBeCalledWith(CANT_INTERACT_MESSAGE);
+    expect(mockTgReply).toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
   });
 
   test("should only call 'reply' function with CANT_INTERACT_MESSAGE when 'ctx.from' is unacceptable", () => {
@@ -30,7 +31,7 @@ describe("senderCanInteract", () => {
       mockTgNext
     );
     expect(mockTgNext).not.toBeCalled();
-    expect(mockTgReply).toBeCalledWith(CANT_INTERACT_MESSAGE);
+    expect(mockTgReply).toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
   });
 
   test("should only call 'next' function when user is acceptable", () => {
