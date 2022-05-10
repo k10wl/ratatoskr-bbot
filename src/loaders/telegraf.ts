@@ -10,7 +10,7 @@ export async function loadTelegraf(telegraf: Telegraf, debug: Debugger) {
     await telegraf.launch();
     debug(BOT_MESSAGES.TELEGRAF_LAUNCHED_SUCCESSFULLY);
   } catch (error) {
-    debug(BOT_MESSAGES.TELEGRAF_LAUNCH_FAILED);
+    debug(BOT_MESSAGES.TELEGRAF_LAUNCH_ERROR);
     debug(error);
   }
 }

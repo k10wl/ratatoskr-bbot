@@ -15,5 +15,5 @@ async function startServer() {
 }
 
 void startServer()
-  .then(() => debug(BOT_MESSAGES.SERVER_LAUNCHED_SUCCESSFULLY))
-  .catch(() => debug(BOT_MESSAGES.SERVER_LAUNCH_FAILED));
+  .then(() => debug(BOT_MESSAGES.RATATOSKR_LAUNCHED_SUCCESSFULLY))
+  .catch(() => debug(BOT_MESSAGES.RATATOSKR_LAUNCH_ERROR));
