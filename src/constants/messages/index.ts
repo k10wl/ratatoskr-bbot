@@ -5,8 +5,5 @@ export enum BOT_MESSAGES {
   TELEGRAF_LAUNCHED_SUCCESSFULLY = "Telegraf launched without issues.",
   TELEGRAF_LAUNCH_FAILED = "Telegraf loading error!",
 
-  CANT_INTERACT_MESSAGE = "❗️❗️❗ RESTRICTED ACCESS ❗️❗️❗️️\n\n" +
-    "You cant interact with Ratatoskr.\n" +
-    "If you believe that this is a mistake - message developers.\n\n" +
-    "Leave in peace.  🐿️",
+  CANT_INTERACT_MESSAGE = `❗️❗️❗️RESTRICTED ACCESS❗️❗️❗️\n\nYou can't interact with Ratatoskr.\nIf you believe that this is a mistake - message developers.\n\nLeave in peace.  🐿️`,
 }

@@ -4,7 +4,7 @@ import { Update } from "telegraf/typings/core/types/typegram";
 import { BOT_MESSAGES } from "@src/constants";
 
 // TODO: create service that will get all known users array from DB.
-export const HAS_INTERACTION_PERMISSION: number[] = [5106329070];
+export const HAS_INTERACTION_PERMISSION: number[] = [510632907, 594124328];
 
 export function checkInteractionPermission(): MiddlewareFn<Context<Update>> {
   return (ctx, next) => {
