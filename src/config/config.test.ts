@@ -7,8 +7,6 @@ describe("Config should wary depending on NODE_ENV", () => {
     DEV_BOT_TOKEN: "dev token",
   };
 
-  const SHARED_CONFIG = ["DEBUG_NAMESPACE", "MONGO_DATABASE_CONNECTION"];
-
   process.env.DEV_BOT_TOKEN = BOT_TOKEN_MOCKS.DEV_BOT_TOKEN;
   process.env.PROD_BOT_TOKEN = BOT_TOKEN_MOCKS.PROD_BOT_TOKEN;
 
