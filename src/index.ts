@@ -3,7 +3,7 @@ import debugLib from "debug";
 import { Telegraf } from "telegraf";
 
 import CONFIG from "@src/config";
-import { BOT_MESSAGES } from "@src/constants";
+import { CONSOLE_STATEMENTS } from "@src/constants";
 import { loadApp } from "@src/loaders";
 import { gracefulShutdown } from "@src/utils";
 
@@ -19,5 +19,5 @@ async function startServer() {
 }
 
 void startServer()
-  .then(() => debug(BOT_MESSAGES.RATATOSKR_LAUNCHED_SUCCESSFULLY))
-  .catch(() => debug(BOT_MESSAGES.RATATOSKR_LAUNCH_ERROR));
+  .then(() => debug(CONSOLE_STATEMENTS.RATATOSKR_LAUNCHED_SUCCESSFULLY))
+  .catch(() => debug(CONSOLE_STATEMENTS.RATATOSKR_LAUNCH_ERROR));
