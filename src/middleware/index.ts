@@ -1,1 +1,1 @@
-export * from "./checkInteractionPermission";
+export * from "./filterRegisteredUser";
