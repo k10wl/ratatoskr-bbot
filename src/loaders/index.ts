@@ -1,8 +1,8 @@
 import { Debugger } from "debug";
 import { Telegraf } from "telegraf";
 
-import { loadMongoose } from "@src/loaders/mongoose";
-import { loadTelegraf } from "@src/loaders/telegraf";
+import { loadMongoose } from "./mongoose";
+import { loadTelegraf } from "./telegraf";
 
 export async function loadApp(
   telegraf: Telegraf,

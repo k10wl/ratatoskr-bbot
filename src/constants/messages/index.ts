@@ -1,6 +1,14 @@
-export enum BOT_MESSAGES {
-  CANT_INTERACT_MESSAGE = `❗️❗️❗️RESTRICTED ACCESS❗️❗️❗️\n\nYou can't interact with Ratatoskr.\nIf you believe that this is a mistake - message developers.\n\nLeave in peace.  🐿️`,
-}
+export const BOT_MESSAGES = {
+  CANT_INTERACT_MESSAGE: `❗️❗️❗️RESTRICTED ACCESS❗️❗️❗️\n\nYou can't interact with Ratatoskr.\nIf you believe that this is a mistake - message developers.\n\nLeave in peace.  🐿️`,
+
+  TEXT_REACTION: {
+    PREFIX:
+      "Please send photo 📷 or video 📹 to create post.\nUse menu commands to manage bot. 🔧\n\n(This message will disappear in",
+    COUNTDOWN_SECONDS: 10,
+    SUFFIX: "seconds. 🥷)",
+    COUNTDOWN_STEP_SECONDS: 1,
+  },
+} as const;
 
 export enum CONSOLE_STATEMENTS {
   GRACEFUL_SHUTDOWN_START = "Gracefully going offline.",
