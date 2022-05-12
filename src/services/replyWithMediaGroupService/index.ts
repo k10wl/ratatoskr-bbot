@@ -16,15 +16,17 @@ export async function replyWithMediaGroupService(
   const { newMediaGroup, originalMediaGroup, creatingMediaGroup } =
     await createMediaGroup(chatsMap, ctx);
 
-  if (creatingMediaGroup) {
+  if (creatingMediaGroup || newMediaGroup.length > 2) {
     await ctx.replyWithChatAction("upload_photo");
 
     return;
   }
 
-  await ctx.replyWithMediaGroup(newMediaGroup);
+  ctx.state.reply = await ctx.replyWithMediaGroup(newMediaGroup);
 
   originalMediaGroup.forEach((message) => {
     void ctx.telegram.deleteMessage(message.chat.id, message.message_id);
   });
+
+  next();
 }
