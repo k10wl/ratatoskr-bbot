@@ -1,7 +1,7 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-import { replyToTextMessage } from "./index";
+import { replyToTextMessageService } from "./index";
 
 const mockReply = jest.fn();
 const mockDelete = jest.fn();
@@ -13,14 +13,14 @@ const mockContext = {
   deleteMessage: mockDelete,
 };
 
-describe("replyToTextMessage", () => {
+describe("replyToTextMessageService", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     Object.setPrototypeOf(mockContext.message, initialMessage);
   });
 
   test("should call delete and reply if message is plain text", async () => {
-    await replyToTextMessage(
+    await replyToTextMessageService(
       mockContext as unknown as NarrowedContext<Context, MountMap["message"]>,
       mockNext
     );
@@ -36,7 +36,7 @@ describe("replyToTextMessage", () => {
   ) => {
     Object.setPrototypeOf(mockContext.message, { [key]: value });
 
-    await replyToTextMessage(
+    await replyToTextMessageService(
       mockContext as unknown as NarrowedContext<Context, MountMap["message"]>,
       mockNext
     );

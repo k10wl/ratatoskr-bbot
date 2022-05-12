@@ -1,17 +1,11 @@
-import { Context, MiddlewareFn } from "telegraf";
-import { Update } from "telegraf/typings/core/types/typegram";
+import { Composer } from "telegraf";
 
-import { BOT_MESSAGES } from "@src/constants";
-import { findOneRegisteredUserById } from "@src/services";
+import { filterRegisteredUserService } from "@src/services";
 
-export function filterRegisteredUser(): MiddlewareFn<Context<Update>> {
-  return async (ctx, next) => {
-    const registeredUser = await findOneRegisteredUserById(ctx.from?.id);
+export function filterRegisteredUser() {
+  const composer = new Composer();
 
-    if (registeredUser) {
-      return next();
-    }
+  composer.on("message", filterRegisteredUserService);
 
-    return ctx.reply(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
-  };
+  return composer;
 }

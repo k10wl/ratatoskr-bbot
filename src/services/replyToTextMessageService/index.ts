@@ -3,7 +3,7 @@ import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES } from "@src/constants";
 
-export async function replyToTextMessage(
+export async function replyToTextMessageService(
   ctx: NarrowedContext<Context, MountMap["message"]>,
   next: () => Promise<void>
 ): Promise<void> {
