@@ -2,12 +2,8 @@ import { Context } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
 import { BOT_MESSAGES } from "@src/constants";
-import * as services from "@src/services";
 
 import { filterRegisteredUser } from "./index";
-
-jest.mock("@src/services");
-const mockedService = services as jest.Mocked<typeof services>;
 
 const mockTgReply = jest.fn();
 const mockTgNext = jest.fn();
@@ -19,28 +15,28 @@ describe("filterRegisteredUser", () => {
     jest.resetAllMocks();
   });
 
-  test("should reply with rejection message and stop interaction when user is not found.", async () => {
-    mockedService.findOneRegisteredUserById = jest.fn().mockResolvedValue(null);
-
-    await filterRegisteredUser(mockTgContext, mockTgNext);
+  test("should reply with rejection message and stop interaction if user is not registered.", async () => {
+    await filterRegisteredUser(
+      {
+        ...mockTgContext,
+        state: { user: { isRegistered: false } },
+      } as never,
+      mockTgNext
+    );
 
     expect(mockTgNext).not.toBeCalled();
     expect(mockTgReply).toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
   });
 
-  test("should proceed interaction without replying when user with given ID is found.", async () => {
-    const TEST_ID = 1234567890;
-
-    mockedService.findOneRegisteredUserById = jest
-      .fn()
-      .mockResolvedValue({ _id: "val", telegraf_user_id: TEST_ID });
-
+  test("should only call next if user is registered.", async () => {
     await filterRegisteredUser(
-      { ...mockTgContext, from: { id: TEST_ID } } as Context<Update>,
+      {
+        ...mockTgContext,
+        state: { user: { isRegistered: true } },
+      } as never,
       mockTgNext
     );
 
-    expect(mockedService.findOneRegisteredUserById).toBeCalledWith(TEST_ID);
     expect(mockTgNext).toBeCalled();
     expect(mockTgReply).not.toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
   });

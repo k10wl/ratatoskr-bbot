@@ -1,11 +1,11 @@
 import { Composer } from "telegraf";
 
-import { filterRegisteredUser } from "@src/services";
+import { addUserToState, filterRegisteredUser } from "@src/services";
 
 export function auth() {
   const composer = new Composer();
 
-  composer.on("message", filterRegisteredUser);
+  composer.on("message", addUserToState, filterRegisteredUser);
 
   return composer;
 }

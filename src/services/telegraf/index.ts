@@ -1,3 +1,4 @@
+export * from "./addUserToState";
 export * from "./filterRegisteredUser";
 export * from "./replyToTextMessage";
 export * from "./replyWithAnimation";
