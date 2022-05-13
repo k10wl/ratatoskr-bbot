@@ -16,7 +16,7 @@ export async function replyWithMediaGroup(
   const { newMediaGroup, originalMediaGroup, creatingMediaGroup } =
     await createMediaGroup(chatsMap, ctx);
 
-  if (creatingMediaGroup || newMediaGroup.length > 2) {
+  if (creatingMediaGroup || newMediaGroup.length < 2) {
     await ctx.replyWithChatAction("upload_photo");
 
     return;
