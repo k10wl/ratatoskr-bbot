@@ -10,4 +10,5 @@ module.exports = {
     "^@src(.*)$": "<rootDir>/src$1",
     "^@types(.*)$": "<rootDir>/src/types/index.ts",
   },
+  timers: "fake",
 };

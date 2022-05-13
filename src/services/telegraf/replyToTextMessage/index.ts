@@ -36,9 +36,6 @@ export async function replyToTextMessage(
 
   setTimeout(async () => {
     clearInterval(interval);
-    await ctx.telegram.deleteMessage(
-      replyMessage.chat.id,
-      replyMessage.message_id
-    );
+    await ctx.deleteMessage(replyMessage.message_id);
   }, BOT_MESSAGES.TEXT_REACTION.COUNTDOWN_SECONDS * 1000);
 }
