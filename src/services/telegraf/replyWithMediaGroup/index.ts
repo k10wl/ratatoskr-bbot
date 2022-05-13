@@ -5,7 +5,7 @@ import { ChatsMapT, createMediaGroup } from "./createMediaGroup";
 
 const chatsMap: ChatsMapT = new Map();
 
-export async function replyWithMediaGroupService(
+export async function replyWithMediaGroup(
   ctx: NarrowedContext<Context, MountMap["photo" | "video"]>,
   next: () => void
 ) {

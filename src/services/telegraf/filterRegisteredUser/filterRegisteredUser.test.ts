@@ -4,7 +4,7 @@ import { Update } from "telegraf/typings/core/types/typegram";
 import { BOT_MESSAGES } from "@src/constants";
 import * as services from "@src/services";
 
-import { filterRegisteredUserService } from "./index";
+import { filterRegisteredUser } from "./index";
 
 jest.mock("@src/services");
 const mockedService = services as jest.Mocked<typeof services>;
@@ -14,7 +14,7 @@ const mockTgNext = jest.fn();
 
 const mockTgContext = { reply: mockTgReply } as unknown as Context<Update>;
 
-describe("senderCanInteract", () => {
+describe("filterRegisteredUser", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -22,7 +22,7 @@ describe("senderCanInteract", () => {
   test("should reply with rejection message and stop interaction when user is not found.", async () => {
     mockedService.findOneRegisteredUserById = jest.fn().mockResolvedValue(null);
 
-    await filterRegisteredUserService(mockTgContext, mockTgNext);
+    await filterRegisteredUser(mockTgContext, mockTgNext);
 
     expect(mockTgNext).not.toBeCalled();
     expect(mockTgReply).toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
@@ -35,7 +35,7 @@ describe("senderCanInteract", () => {
       .fn()
       .mockResolvedValue({ _id: "val", telegraf_user_id: TEST_ID });
 
-    await filterRegisteredUserService(
+    await filterRegisteredUser(
       { ...mockTgContext, from: { id: TEST_ID } } as Context<Update>,
       mockTgNext
     );

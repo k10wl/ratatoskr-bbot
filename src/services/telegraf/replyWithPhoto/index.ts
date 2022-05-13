@@ -1,7 +1,7 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-export async function replyWithPhotoService(
+export async function replyWithPhoto(
   ctx: NarrowedContext<Context, MountMap["photo"]>,
   next: () => void
 ) {

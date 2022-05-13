@@ -2,21 +2,21 @@ import { Composer } from "telegraf";
 import { Message } from "telegraf/typings/core/types/typegram";
 
 import {
-  replyToTextMessageService,
-  replyWithAnimationService,
-  replyWithMediaGroupService,
-  replyWithPhotoService,
-  replyWithVideoService,
+  replyToTextMessage,
+  replyWithAnimation,
+  replyWithMediaGroup,
+  replyWithPhoto,
+  replyWithVideo,
 } from "@src/services";
 
-export function apiComposer() {
+export function api() {
   const composer = new Composer();
 
-  composer.on("photo", replyWithPhotoService);
-  composer.on("video", replyWithVideoService);
-  composer.on("animation", replyWithAnimationService);
+  composer.on("photo", replyWithPhoto);
+  composer.on("video", replyWithVideo);
+  composer.on("animation", replyWithAnimation);
 
-  composer.on(["photo", "video"], replyWithMediaGroupService);
+  composer.on(["photo", "video"], replyWithMediaGroup);
 
   // TODO: Refactor this proof of concept into menu middleware
   composer.on(["photo", "video", "animation"], (ctx) => {
@@ -31,7 +31,7 @@ export function apiComposer() {
     }, 5000);
   });
 
-  composer.on("message", replyToTextMessageService);
+  composer.on("message", replyToTextMessage);
 
   return composer;
 }

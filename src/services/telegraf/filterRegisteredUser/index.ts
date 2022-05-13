@@ -4,7 +4,7 @@ import { Update } from "telegraf/typings/core/types/typegram";
 import { BOT_MESSAGES } from "@src/constants";
 import { findOneRegisteredUserById } from "@src/services";
 
-export async function filterRegisteredUserService(
+export async function filterRegisteredUser(
   ctx: Context<Update>,
   next: () => void
 ) {
@@ -14,5 +14,5 @@ export async function filterRegisteredUserService(
     return next();
   }
 
-  return ctx.reply(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
+  await ctx.reply(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
 }
