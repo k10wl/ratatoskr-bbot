@@ -3,18 +3,20 @@ import { Telegraf } from "telegraf";
 
 import { api } from "@src/api";
 import { CONSOLE_STATEMENTS } from "@src/constants";
-import { auth } from "@src/middleware";
+import { auth, debug } from "@src/middleware";
 
-export async function loadTelegraf(telegraf: Telegraf, debug: Debugger) {
+export async function loadTelegraf(telegraf: Telegraf, debugFn: Debugger) {
   try {
+    telegraf.use(debug(debugFn));
+
     telegraf.use(auth());
 
     telegraf.use(api());
 
     await telegraf.launch();
-    debug(CONSOLE_STATEMENTS.TELEGRAF_LAUNCHED_SUCCESSFULLY);
+    debugFn(CONSOLE_STATEMENTS.TELEGRAF_LAUNCHED_SUCCESSFULLY);
   } catch (error) {
-    debug(CONSOLE_STATEMENTS.TELEGRAF_LAUNCH_ERROR);
-    debug(error);
+    debugFn(CONSOLE_STATEMENTS.TELEGRAF_LAUNCH_ERROR);
+    debugFn(error);
   }
 }

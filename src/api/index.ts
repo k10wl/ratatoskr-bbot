@@ -1,5 +1,4 @@
 import { Composer } from "telegraf";
-import { Message } from "telegraf/typings/core/types/typegram";
 
 import {
   replyToTextMessage,
@@ -8,6 +7,8 @@ import {
   replyWithPhoto,
   replyWithVideo,
 } from "@src/services";
+
+import { ContextState } from "@src/types";
 
 export function api() {
   const composer = new Composer();
@@ -20,9 +21,7 @@ export function api() {
 
   // TODO: Refactor this proof of concept into menu middleware
   composer.on(["photo", "video", "animation"], (ctx) => {
-    const { reply } = ctx.state as {
-      reply: Message[];
-    };
+    const { reply } = ctx.state as ContextState;
 
     setTimeout(() => {
       reply.forEach((rep) => {

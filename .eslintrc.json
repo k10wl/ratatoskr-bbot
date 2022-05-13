@@ -45,6 +45,11 @@
             "pattern": "@src",
             "group": "internal",
             "position": "after"
+          },
+          {
+            "pattern": "@src/types",
+            "group": "internal",
+            "position": "after"
           }
         ],
         "pathGroupsExcludedImportTypes": [],
