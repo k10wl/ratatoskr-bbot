@@ -25,7 +25,7 @@ export async function replyWithMediaGroup(
   ctx.state.reply = await ctx.replyWithMediaGroup(newMediaGroup);
 
   originalMediaGroup.forEach((message) => {
-    void ctx.telegram.deleteMessage(message.chat.id, message.message_id);
+    void ctx.deleteMessage(message.message_id);
   });
 
   next();
