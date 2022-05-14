@@ -11,11 +11,11 @@ export function gracefulShutdown(
   return async function () {
     debug(CONSOLE_STATEMENTS.GRACEFUL_SHUTDOWN_START);
 
-    telegraf.stop(CONSOLE_STATEMENTS.TELEGRAF_GRACEFUL_SHUTDOWN);
-    debug(CONSOLE_STATEMENTS.TELEGRAF_STOPPED);
+    telegraf.stop(CONSOLE_STATEMENTS.TELEGRAF.GRACEFUL_SHUTDOWN);
+    debug(CONSOLE_STATEMENTS.TELEGRAF.STOPPED);
 
     await mongoose.disconnect();
-    debug(CONSOLE_STATEMENTS.MONGOOSE_DISCONNECTED);
+    debug(CONSOLE_STATEMENTS.MONGOOSE.DISCONNECTED);
 
     process.exit(0);
   };

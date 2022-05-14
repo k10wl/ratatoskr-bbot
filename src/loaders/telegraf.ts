@@ -14,9 +14,9 @@ export async function loadTelegraf(telegraf: Telegraf, debugFn: Debugger) {
     telegraf.use(api());
 
     await telegraf.launch();
-    debugFn(CONSOLE_STATEMENTS.TELEGRAF_LAUNCHED_SUCCESSFULLY);
+    debugFn(CONSOLE_STATEMENTS.TELEGRAF.LAUNCH.SUCCESS);
   } catch (error) {
-    debugFn(CONSOLE_STATEMENTS.TELEGRAF_LAUNCH_ERROR);
+    debugFn(CONSOLE_STATEMENTS.TELEGRAF.LAUNCH.ERROR);
     debugFn(error);
   }
 }

@@ -19,5 +19,5 @@ async function startServer() {
 }
 
 void startServer()
-  .then(() => debug(CONSOLE_STATEMENTS.RATATOSKR_LAUNCHED_SUCCESSFULLY))
-  .catch(() => debug(CONSOLE_STATEMENTS.RATATOSKR_LAUNCH_ERROR));
+  .then(() => debug(CONSOLE_STATEMENTS.RATATOSKR.LAUNCH.SUCCESS))
+  .catch(() => debug(CONSOLE_STATEMENTS.RATATOSKR.LAUNCH.ERROR));

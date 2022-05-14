@@ -7,9 +7,9 @@ import { CONSOLE_STATEMENTS } from "@src/constants";
 export async function loadMongoose(debug: Debugger): Promise<void> {
   try {
     await mongoose.connect(config.MONGO_DATABASE_CONNECTION as string);
-    debug(CONSOLE_STATEMENTS.MONGOOSE_CONNECTED_SUCCESSFULLY);
+    debug(CONSOLE_STATEMENTS.MONGOOSE.CONNECTION.SUCCESS);
   } catch (error) {
-    debug(CONSOLE_STATEMENTS.MONGOOSE_CONNECTION_ERROR);
+    debug(CONSOLE_STATEMENTS.MONGOOSE.CONNECTION.ERROR);
     debug(error);
   }
 }

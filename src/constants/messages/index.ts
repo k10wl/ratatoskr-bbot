@@ -10,18 +10,30 @@ export const BOT_MESSAGES = {
   },
 } as const;
 
-export enum CONSOLE_STATEMENTS {
-  GRACEFUL_SHUTDOWN_START = "Gracefully going offline.",
+export const CONSOLE_STATEMENTS = {
+  GRACEFUL_SHUTDOWN_START: "Gracefully going offline.",
 
-  MONGOOSE_CONNECTION_ERROR = "An error occurred while connecting ot mongoose cluster.",
-  MONGOOSE_CONNECTED_SUCCESSFULLY = "Successfully connected to mongoose cluster.",
-  MONGOOSE_DISCONNECTED = "Mongoose connection gracefully closed.",
+  MONGOOSE: {
+    CONNECTION: {
+      ERROR: "An error occurred while connecting ot mongoose cluster.",
+      SUCCESS: "Successfully connected to mongoose cluster.",
+    },
+    DISCONNECTED: "Mongoose connection gracefully closed.",
+  },
 
-  RATATOSKR_LAUNCH_ERROR = "An error occurred upon Ratatoskr launch.",
-  RATATOSKR_LAUNCHED_SUCCESSFULLY = "Ratatoskr is live.",
+  RATATOSKR: {
+    LAUNCH: {
+      ERROR: "An error occurred upon Ratatoskr launch.",
+      SUCCESS: "Ratatoskr is live.",
+    },
+  },
 
-  TELEGRAF_GRACEFUL_SHUTDOWN = "Graceful shut down.",
-  TELEGRAF_LAUNCH_ERROR = "Telegraf loading error!",
-  TELEGRAF_LAUNCHED_SUCCESSFULLY = "Telegraf launched without issues.",
-  TELEGRAF_STOPPED = "Telegraf gracefully stopped.",
-}
+  TELEGRAF: {
+    GRACEFUL_SHUTDOWN: "Graceful shut down.",
+    LAUNCH: {
+      ERROR: "Telegraf loading error!",
+      SUCCESS: "Telegraf launched without issues.",
+    },
+    STOPPED: "Telegraf gracefully stopped.",
+  },
+} as const;
