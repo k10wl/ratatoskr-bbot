@@ -1,11 +1,13 @@
-import { Context } from "telegraf";
-import { Update } from "telegraf/typings/core/types/typegram";
+import { Context, NarrowedContext } from "telegraf";
+import { MountMap } from "telegraf/typings/telegram-types";
 
 import { TAG_GROUPS } from "@src/constants";
 import { getTagsMenu } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
-export async function setTagsMenuMarkup(ctx: Context<Update>) {
+export async function setTagsMenuMarkup(
+  ctx: NarrowedContext<Context, MountMap["callback_query"]>
+) {
   const tagsMenu = await getTagsMenu();
 
   const sortedTags = tagsMenu.sort((a, b) => a.originalIndex - b.originalIndex);

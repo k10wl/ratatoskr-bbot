@@ -10,4 +10,5 @@ export * from "./replyWithVideo";
 export * from "./sendMenuMessage";
 export * from "./setGroupTagsMenuMarkup";
 export * from "./setMainMenuMarkup";
+export * from "./setSelectedTagsMenuMarkup";
 export * from "./setTagsMenuMarkup";

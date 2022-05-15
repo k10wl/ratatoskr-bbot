@@ -1,16 +1,15 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-import { ONE_GROUP_FOOTER_BUTTONS } from "@src/constants";
+import { BOT_MESSAGES, ONE_GROUP_FOOTER_BUTTONS } from "@src/constants";
 import { getOneTagGroupById } from "@src/services/mongoose/getOneTagGroupById";
 import { createInlineKeyboard } from "@src/utils";
 
 export async function setGroupTagsMenuMarkup(
-  ctx: NarrowedContext<Context, MountMap["callback_query"]>,
-  next: () => Promise<void>
+  ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
   if (!ctx.callbackQuery.data) {
-    return next();
+    return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
   const groupId = ctx.callbackQuery.data.split("-")[1];
@@ -18,7 +17,7 @@ export async function setGroupTagsMenuMarkup(
   const tagGroup = await getOneTagGroupById(groupId);
 
   if (!tagGroup) {
-    return ctx.reply("Something went wrong.");
+    return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
   const { tags, groupName } = tagGroup;

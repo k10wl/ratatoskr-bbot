@@ -7,7 +7,7 @@ export function parseTags(tagsString: string) {
     throw new Error(CONSOLE_STATEMENTS.STRING_PARSE_ERROR);
   }
 
-  const [_, ...tagsArr] = tagsString.split("• ");
+  const [, ...tagsArr] = tagsString.split("• ");
 
   return tagsArr.map((rawTags, index) => {
     const [groupName, ...list] = rawTags.split(/\n/);
