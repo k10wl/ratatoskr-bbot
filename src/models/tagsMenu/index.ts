@@ -10,6 +10,10 @@ const tagSchema = new Schema<TagT>({
 });
 
 const tagsMenuSchema = new Schema<TagsMenuT>({
+  originalIndex: {
+    type: Number,
+    required: true,
+  },
   groupName: {
     type: String,
     required: true,

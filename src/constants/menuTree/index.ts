@@ -9,7 +9,7 @@ type MenuInstanceT = {
 export const MAIN_MENU: MenuInstanceT = {
   title: "What do you want me to send?",
   structure: [
-    { text: "Lets look at tags.", callback: "root/tags" },
+    { text: "Lets look at tag groups.", callback: "root/tag_groups" },
     { text: "Selected tags.", callback: "root/selected" },
     [
       { text: "Cancel.", callback: "cancel" },
@@ -38,5 +38,5 @@ export const TAG_GROUPS: MenuInstanceT = {
       { text: "Send post.", callback: "send_post" },
     ],
   ],
-  path: "root/tags",
+  path: "root/tag_groups",
 };

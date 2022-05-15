@@ -9,9 +9,10 @@ export function parseTags(tagsString: string) {
 
   const [_, ...tagsArr] = tagsString.split("• ");
 
-  return tagsArr.map((rawTags) => {
+  return tagsArr.map((rawTags, index) => {
     const [groupName, ...list] = rawTags.split(/\n/);
     const obj: TagsMenuT = {
+      originalIndex: index,
       groupName: groupName.replace(":", ""),
       tags: list.filter(Boolean).map((tag) => ({ tag })),
     };

@@ -10,7 +10,9 @@ export async function setTagsMenuMarkup(ctx: Context<Update>) {
 
   const tagsMenu = await getTagsMenu();
 
-  const tagGroups: ButtonT[] = tagsMenu.map((tag) => ({
+  const sortedTags = tagsMenu.sort((a, b) => a.originalIndex - b.originalIndex);
+
+  const tagGroups: ButtonT[] = sortedTags.map((tag) => ({
     text: tag.groupName,
     callback: tag._id.toString(),
   }));

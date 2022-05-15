@@ -18,10 +18,12 @@ describe("parseTags", () => {
     expect(parseTags(tags)).toEqual([
       {
         groupName: "Test group",
+        originalIndex: 0,
         tags: [{ tag: "#tag1" }, { tag: "#tag2" }, { tag: "#tag3" }],
       },
       {
         groupName: "Test group2",
+        originalIndex: 1,
         tags: [{ tag: "#tag1" }, { tag: "#tag2" }, { tag: "#tag3" }],
       },
     ]);

@@ -20,6 +20,7 @@ export type TagT = {
 };
 
 export type TagsMenuT = {
+  originalIndex: number;
   groupName: string;
   tags: TagT[];
 };
