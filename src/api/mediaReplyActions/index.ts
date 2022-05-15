@@ -11,11 +11,11 @@ export function mediaReplyActions() {
 
   // TODO: refactor into service
   composer.action(SELECTED_TAGS.path, async (ctx) => {
-    await ctx.answerCbQuery();
-
     const { reply_markup } = createInlineKeyboard(SELECTED_TAGS.structure);
 
     await ctx.editMessageReplyMarkup(reply_markup);
+
+    await ctx.answerCbQuery();
   });
 
   composer.action(TAG_GROUPS.path, setTagsMenuMarkup);

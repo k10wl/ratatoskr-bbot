@@ -6,8 +6,6 @@ import { getTagsMenu } from "@src/services";
 import { ButtonT, createInlineKeyboard } from "@src/utils";
 
 export async function setTagsMenuMarkup(ctx: Context<Update>) {
-  await ctx.answerCbQuery();
-
   const tagsMenu = await getTagsMenu();
 
   const sortedTags = tagsMenu.sort((a, b) => a.originalIndex - b.originalIndex);
@@ -27,4 +25,6 @@ export async function setTagsMenuMarkup(ctx: Context<Update>) {
       ...baseButtons.reply_markup.inline_keyboard,
     ],
   });
+
+  await ctx.answerCbQuery();
 }
