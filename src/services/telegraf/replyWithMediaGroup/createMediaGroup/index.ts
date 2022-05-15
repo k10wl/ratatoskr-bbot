@@ -29,6 +29,15 @@ type CreateMediaGroupT = Promise<{
   creatingMediaGroup: boolean;
 }>;
 
+const UNFORMED_GROUP = {
+  newMediaGroup: [],
+  originalMediaGroup: [],
+  creatingMediaGroup: false,
+};
+
+// 1000ms is safe time for bot to process media messages
+const SAFE_TIMEOUT = 1000;
+
 export async function createMediaGroup(
   chatsMap: ChatsMapT,
   ctx: NarrowedContext<Context, MountMap["photo" | "video"]>
@@ -36,11 +45,7 @@ export async function createMediaGroup(
   const message = ctx.message || ctx.channelPost;
 
   if (!message?.media_group_id) {
-    return {
-      newMediaGroup: [],
-      originalMediaGroup: [],
-      creatingMediaGroup: false,
-    };
+    return UNFORMED_GROUP;
   }
 
   if (!chatsMap.get(ctx.chat.id)) {
@@ -50,11 +55,7 @@ export async function createMediaGroup(
   const userMediaGroupMap = chatsMap.get(ctx.chat.id);
 
   if (!userMediaGroupMap) {
-    return {
-      newMediaGroup: [],
-      originalMediaGroup: [],
-      creatingMediaGroup: false,
-    };
+    return UNFORMED_GROUP;
   }
 
   if (!userMediaGroupMap?.get(message.media_group_id)) {
@@ -67,21 +68,16 @@ export async function createMediaGroup(
   const originalMediaGroup = userMediaGroupMap.get(message.media_group_id);
 
   if (!originalMediaGroup) {
-    return {
-      newMediaGroup: [],
-      originalMediaGroup: [],
-      creatingMediaGroup: false,
-    };
+    return UNFORMED_GROUP;
   }
 
   // This is a workaround for telegram dealing group message as a separate message
   // The following block processes all media messages before giving a result
-  // 1000ms is safe time for bot to process media messages
   originalMediaGroup.isLast(false);
   originalMediaGroup.messages.push(message);
   const resolveTimeout = new Promise((resolve) => {
     originalMediaGroup.isLast = resolve;
-    setTimeout(() => resolve(true), 1000);
+    setTimeout(() => resolve(true), SAFE_TIMEOUT);
   });
   const lastMediaGroupItem = await resolveTimeout;
 
