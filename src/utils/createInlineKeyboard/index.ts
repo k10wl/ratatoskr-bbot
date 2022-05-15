@@ -1,6 +1,6 @@
 import { Markup } from "telegraf";
 
-type ButtonT = {
+export type ButtonT = {
   text: string;
   callback: string;
 };

@@ -9,3 +9,4 @@ export * from "./replyWithPhoto";
 export * from "./replyWithVideo";
 export * from "./sendMenuMessage";
 export * from "./setMainMenuMarkup";
+export * from "./setTagsMenuMarkup";

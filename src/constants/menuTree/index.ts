@@ -29,3 +29,14 @@ export const SELECTED_TAGS: MenuInstanceT = {
   ],
   path: "root/selected",
 };
+
+export const TAG_GROUPS: MenuInstanceT = {
+  title: "Tag groups.",
+  structure: [
+    [
+      { text: "Main menu.", callback: "root" },
+      { text: "Send post.", callback: "send_post" },
+    ],
+  ],
+  path: "root/tags",
+};

@@ -2,7 +2,7 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES } from "@src/constants";
-import { addNewTagGroup } from "@src/services";
+import { addNewTagGroup, dropTagGroups } from "@src/services";
 import { parseTags } from "@src/utils";
 
 export async function processForwardedTags(
@@ -12,6 +12,7 @@ export async function processForwardedTags(
   if ("text" in ctx.message) {
     const tagsObject = parseTags(ctx.message.text);
 
+    await dropTagGroups();
     await Promise.all(tagsObject.map(async (group) => addNewTagGroup(group)));
 
     await ctx.reply(BOT_MESSAGES.TAGS.TAGS_UPDATED);

@@ -1,7 +1,7 @@
 import { Composer } from "telegraf";
 
-import { MAIN_MENU, SELECTED_TAGS } from "@src/constants";
-import { setMainMenuMarkup } from "@src/services";
+import { MAIN_MENU, SELECTED_TAGS, TAG_GROUPS } from "@src/constants";
+import { setMainMenuMarkup, setTagsMenuMarkup } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
 export function mediaReplyActions() {
@@ -17,6 +17,8 @@ export function mediaReplyActions() {
 
     await ctx.editMessageReplyMarkup(reply_markup);
   });
+
+  composer.action(TAG_GROUPS.path, setTagsMenuMarkup);
 
   return composer;
 }
