@@ -5,9 +5,9 @@ import { MAIN_MENU } from "@src/constants";
 import { createInlineKeyboard } from "@src/utils";
 
 export async function setMainMenuMarkup(ctx: Context<Update>) {
-  const { reply_markup } = createInlineKeyboard(MAIN_MENU.structure);
+  const inlineKeyboard = createInlineKeyboard(MAIN_MENU.structure);
 
-  await ctx.editMessageReplyMarkup(reply_markup);
+  await ctx.editMessageText(MAIN_MENU.title, inlineKeyboard);
 
   await ctx.answerCbQuery();
 }

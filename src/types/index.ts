@@ -1,4 +1,5 @@
 import { Debugger } from "debug";
+import { Types } from "mongoose";
 import { Message, User } from "telegraf/typings/core/types/typegram";
 
 export type RegisteredUserT = {
@@ -17,6 +18,7 @@ export type ContextState = {
 
 export type TagT = {
   tag: string;
+  _id?: Types.ObjectId;
 };
 
 export type TagsMenuT = {

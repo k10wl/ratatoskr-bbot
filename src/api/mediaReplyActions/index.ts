@@ -1,7 +1,11 @@
 import { Composer } from "telegraf";
 
 import { MAIN_MENU, SELECTED_TAGS, TAG_GROUPS } from "@src/constants";
-import { setMainMenuMarkup, setTagsMenuMarkup } from "@src/services";
+import {
+  setGroupTagsMenuMarkup,
+  setMainMenuMarkup,
+  setTagsMenuMarkup,
+} from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
 export function mediaReplyActions() {
@@ -11,14 +15,16 @@ export function mediaReplyActions() {
 
   // TODO: refactor into service
   composer.action(SELECTED_TAGS.path, async (ctx) => {
-    const { reply_markup } = createInlineKeyboard(SELECTED_TAGS.structure);
+    const inlineKeyboard = createInlineKeyboard(SELECTED_TAGS.structure);
 
-    await ctx.editMessageReplyMarkup(reply_markup);
+    await ctx.editMessageText(SELECTED_TAGS.title, inlineKeyboard);
 
     await ctx.answerCbQuery();
   });
 
   composer.action(TAG_GROUPS.path, setTagsMenuMarkup);
+
+  composer.action(/^getTagsByGroupId-.*/, setGroupTagsMenuMarkup);
 
   return composer;
 }

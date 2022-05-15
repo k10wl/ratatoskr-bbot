@@ -40,3 +40,10 @@ export const TAG_GROUPS: MenuInstanceT = {
   ],
   path: "root/tag_groups",
 };
+
+export const ONE_GROUP_FOOTER_BUTTONS: ButtonsT = [
+  [
+    { text: "Back.", callback: "root/tag_groups" },
+    { text: "Send post.", callback: "send_post" },
+  ],
+];
