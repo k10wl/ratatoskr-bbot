@@ -72,7 +72,8 @@
     "@typescript-eslint/no-this-alias": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
     "no-console": "error",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {

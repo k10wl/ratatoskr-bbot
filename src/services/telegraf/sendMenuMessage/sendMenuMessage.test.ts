@@ -1,4 +1,4 @@
-import { BOT_MESSAGES } from "@src/constants";
+import { MAIN_MENU } from "@src/constants";
 
 import { sendMenuMessage } from "./index";
 
@@ -49,7 +49,7 @@ describe("sendMenuMessage", () => {
 
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
-    expect(mockReply).toBeCalledWith(BOT_MESSAGES.MENU.MAIN_MENU);
+    expect(mockReply).toBeCalledWith(MAIN_MENU.title);
 
     expect(mockNext).not.toBeCalled();
   });

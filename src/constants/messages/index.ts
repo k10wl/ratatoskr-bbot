@@ -8,10 +8,6 @@ export const BOT_MESSAGES = {
     SUFFIX: "seconds. 🥷)",
     COUNTDOWN_STEP_SECONDS: 1,
   },
-
-  MENU: {
-    MAIN_MENU: "What do you want me to send?",
-  },
 } as const;
 
 export const CONSOLE_STATEMENTS = {

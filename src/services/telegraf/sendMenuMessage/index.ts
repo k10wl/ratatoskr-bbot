@@ -1,7 +1,8 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-import { BOT_MESSAGES } from "@src/constants";
+import { MAIN_MENU } from "@src/constants";
+import { createInlineKeyboard } from "@src/utils";
 
 import { ContextState } from "@src/types";
 
@@ -15,5 +16,7 @@ export async function sendMenuMessage(
     return next();
   }
 
-  await ctx.reply(BOT_MESSAGES.MENU.MAIN_MENU);
+  const inlineKeyboard = createInlineKeyboard(MAIN_MENU.structure);
+
+  await ctx.reply(MAIN_MENU.title, inlineKeyboard);
 }
