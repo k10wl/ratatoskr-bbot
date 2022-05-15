@@ -6,9 +6,8 @@ import {
   replyWithMediaGroup,
   replyWithPhoto,
   replyWithVideo,
+  sendMenuMessage,
 } from "@src/services";
-
-import { ContextState } from "@src/types";
 
 export function api() {
   const composer = new Composer();
@@ -19,16 +18,7 @@ export function api() {
 
   composer.on(["photo", "video"], replyWithMediaGroup);
 
-  // TODO: Refactor this proof of concept into menu middleware
-  composer.on(["photo", "video", "animation"], (ctx) => {
-    const { reply } = ctx.state as ContextState;
-
-    setTimeout(() => {
-      reply.forEach((rep) => {
-        void ctx.deleteMessage(rep.message_id);
-      });
-    }, 5000);
-  });
+  composer.on(["photo", "video", "animation"], sendMenuMessage);
 
   composer.on("message", replyToTextMessage);
 

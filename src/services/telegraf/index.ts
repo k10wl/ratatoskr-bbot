@@ -5,3 +5,4 @@ export * from "./replyWithAnimation";
 export * from "./replyWithMediaGroup";
 export * from "./replyWithPhoto";
 export * from "./replyWithVideo";
+export * from "./sendMenuMessage";
