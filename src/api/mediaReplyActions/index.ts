@@ -9,6 +9,7 @@ export function mediaReplyActions() {
 
   composer.action(MAIN_MENU.path, setMainMenuMarkup);
 
+  // TODO: refactor into service
   composer.action(SELECTED_TAGS.path, async (ctx) => {
     await ctx.answerCbQuery();
 
