@@ -14,3 +14,17 @@ export type ContextState = {
   reply: Message[];
   user: UserT;
 };
+
+export type TagT = {
+  tag: string;
+};
+
+export type TagsMenuT = {
+  groupName: string;
+  tags: TagT[];
+};
+
+export type GroupInfoT = {
+  groupId: number;
+  tagsMessageId: number;
+};

@@ -8,6 +8,12 @@ export const BOT_MESSAGES = {
     SUFFIX: "seconds. 🥷)",
     COUNTDOWN_STEP_SECONDS: 1,
   },
+
+  TAGS: {
+    WRONG_MESSAGE:
+      "❗❗❗Tags update failure❗❗❗\n\nIncorrect message. Please, double check your actions. 👀",
+    TAGS_UPDATED: "Tags list updated successfully. ✅",
+  },
 } as const;
 
 export const CONSOLE_STATEMENTS = {
@@ -36,4 +42,6 @@ export const CONSOLE_STATEMENTS = {
     },
     STOPPED: "Telegraf gracefully stopped.",
   },
+
+  STRING_PARSE_ERROR: "Cannot parse tags. Wrong string format.",
 } as const;
