@@ -9,14 +9,49 @@ export async function processForwardedTags(
   ctx: NarrowedContext<Context, MountMap["forward_date"]>,
   next: () => Promise<void>
 ) {
-  if ("text" in ctx.message) {
-    const tagsObject = parseTags(ctx.message.text);
+  if (!("text" in ctx.message)) {
+    return next();
+  }
 
-    await dropTagGroups();
+  const tagsObject = parseTags(ctx.message.text);
+
+  const reply = await ctx.reply(BOT_MESSAGES.TAGS.UPDATING_TAGS);
+
+  let dots = "";
+  const interval = setInterval(() => {
+    if (dots.length === 5) {
+      dots = "";
+    } else {
+      dots += ".";
+    }
+
+    void ctx.telegram.editMessageText(
+      reply.chat.id,
+      reply.message_id,
+      undefined,
+      `${reply.text}${dots}`
+    );
+  }, 300);
+
+  await dropTagGroups();
+
+  try {
     await Promise.all(tagsObject.map(async (group) => addNewTagGroup(group)));
 
-    await ctx.reply(BOT_MESSAGES.TAGS.TAGS_UPDATED);
-  } else {
-    await next();
+    clearInterval(interval);
+
+    await ctx.telegram.editMessageText(
+      reply.chat.id,
+      reply.message_id,
+      undefined,
+      BOT_MESSAGES.TAGS.TAGS_UPDATED
+    );
+  } catch (error) {
+    await ctx.telegram.editMessageText(
+      reply.chat.id,
+      reply.message_id,
+      undefined,
+      BOT_MESSAGES.ERROR
+    );
   }
 }

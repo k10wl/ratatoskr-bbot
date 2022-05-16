@@ -9,10 +9,10 @@ import { replyWithMedia } from "./replyWithMedia";
 export function api() {
   const composer = new Composer();
 
-  composer.use(tagsManagement());
-
   composer.use(replyWithMedia());
   composer.use(mediaReplyActions());
+
+  composer.use(tagsManagement());
 
   composer.on("message", replyToTextMessage);
 
