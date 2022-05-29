@@ -74,7 +74,8 @@
     "no-console": "error",
     "consistent-return": "off",
     "camelcase": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   "settings": {
     "import/resolver": {

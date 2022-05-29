@@ -1,10 +1,12 @@
-import { MAIN_MENU } from "@src/constants";
+import { TAG_GROUPS } from "@src/constants";
 
 import { sendMenuMessage } from "./index";
 
-const mockNext = jest.fn();
-const mockReply = jest.fn();
+jest.mock("@src/services", () => ({ getTagsMenu: () => [] }));
 
+const mockNext = jest.fn();
+
+const mockReply = jest.fn();
 const mockReplyFn = (args: never) => {
   mockReply(args);
 
@@ -20,7 +22,6 @@ const replyMessage = {
   chat: { id: 1 },
   message_id: 1,
 };
-
 describe("sendMenuMessage", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -33,7 +34,6 @@ describe("sendMenuMessage", () => {
 
     expect(mockReply).not.toBeCalled();
   });
-
   test("should only call next if state reply array is empty", async () => {
     const state = { reply: [] };
 
@@ -49,7 +49,7 @@ describe("sendMenuMessage", () => {
 
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
-    expect(mockReply).toBeCalledWith(MAIN_MENU.title);
+    expect(mockReply).toBeCalledWith(TAG_GROUPS.title);
 
     expect(mockNext).not.toBeCalled();
   });

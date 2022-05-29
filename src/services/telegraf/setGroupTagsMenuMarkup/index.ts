@@ -22,9 +22,9 @@ export async function setGroupTagsMenuMarkup(
 
   const { tags, groupName } = tagGroup;
 
-  const tagsList = tags.map(({ tag, _id }) => ({
+  const tagsList = tags.map(({ tag }) => ({
     text: tag,
-    callback: _id?.toString() || "root",
+    callback: `tagSelected-${tag}`,
   }));
 
   const mapMenu = [...tagsList, ...ONE_GROUP_FOOTER_BUTTONS];
