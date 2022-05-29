@@ -14,6 +14,7 @@ export const BOT_MESSAGES = {
     WRONG_MESSAGE:
       "❗❗❗Tags update failure❗❗❗\n\nIncorrect message. Please, double check your actions. 👀",
     TAGS_UPDATED: "Tags list updated successfully. ✅",
+    SELECTED_SYMBOL: "🌰",
   },
 
   ERROR: "Something went wrong. Please try again in few minutes.",

@@ -24,8 +24,10 @@ export async function saveTagInSet(
 
   if (tags.has(userChoseTag)) {
     tags.delete(userChoseTag);
+    ctx.state.selectedTag = { name: userChoseTag, action: "REMOVE" };
   } else {
     tags.add(userChoseTag);
+    ctx.state.selectedTag = { name: userChoseTag, action: "ADD" };
   }
 
   await next();

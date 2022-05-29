@@ -2,6 +2,7 @@ import { Composer } from "telegraf";
 
 import { SELECTED_TAGS, TAG_GROUPS } from "@src/constants";
 import {
+  addSelectedSymbolToTag,
   saveTagInSet,
   setGroupTagsMenuMarkup,
   setSelectedTagsMenuMarkup,
@@ -17,7 +18,7 @@ export function mediaReplyActions() {
 
   composer.action(/^getTagsByGroupId-.*/, setGroupTagsMenuMarkup);
 
-  composer.action(/^tagSelected-.*/, saveTagInSet);
+  composer.action(/^tagSelected-.*/, saveTagInSet, addSelectedSymbolToTag);
 
   return composer;
 }

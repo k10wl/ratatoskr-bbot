@@ -14,6 +14,10 @@ export type ContextState = {
   debug: Debugger;
   reply: Message[];
   user: UserT;
+  selectedTag?: {
+    name: string;
+    action: "ADD" | "REMOVE";
+  };
 };
 
 export type TagT = {

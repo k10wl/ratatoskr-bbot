@@ -2,6 +2,7 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES, ONE_GROUP_FOOTER_BUTTONS } from "@src/constants";
+import { getCurrentMessageMap } from "@src/services";
 import { getOneTagGroupById } from "@src/services/mongoose/getOneTagGroupById";
 import { createInlineKeyboard } from "@src/utils";
 
@@ -16,14 +17,20 @@ export async function setGroupTagsMenuMarkup(
 
   const tagGroup = await getOneTagGroupById(groupId);
 
-  if (!tagGroup) {
+  if (!tagGroup || !ctx.update.callback_query.message) {
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
+
+  const { tags: test } = getCurrentMessageMap(
+    ctx.update.callback_query.from.id,
+    ctx.update.callback_query.message,
+    0
+  );
 
   const { tags, groupName } = tagGroup;
 
   const tagsList = tags.map(({ tag }) => ({
-    text: tag,
+    text: test.has(tag) ? `${tag} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}` : tag,
     callback: `tagSelected-${tag}`,
   }));
 
