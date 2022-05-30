@@ -23,7 +23,7 @@ export const SELECTED_TAGS: MenuInstanceT & { noSelectedTags: string } = {
   noSelectedTags: "No tags selected.",
   structure: [
     [
-      { text: "Tag groups..", callback: "root" },
+      { text: "Tag groups.", callback: "root" },
       { text: "Send post.", callback: "send_post" },
     ],
   ],
