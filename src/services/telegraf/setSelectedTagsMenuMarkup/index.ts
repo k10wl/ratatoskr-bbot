@@ -5,9 +5,13 @@ import { BOT_MESSAGES, SELECTED_TAGS } from "@src/constants";
 import { getCurrentTagsSet } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
+import { ContextState } from "@src/types";
+
 export async function setSelectedTagsMenuMarkup(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
+  const { debug } = ctx.state as ContextState;
+
   if (!ctx.update.callback_query.message) {
     await ctx.reply(BOT_MESSAGES.ERROR);
 
@@ -28,10 +32,16 @@ export async function setSelectedTagsMenuMarkup(
     ...SELECTED_TAGS.structure,
   ]);
 
-  await ctx.editMessageText(
-    tags.size === 0 ? SELECTED_TAGS.noSelectedTags : SELECTED_TAGS.title,
-    inlineKeyboard
-  );
+  try {
+    await ctx.editMessageText(
+      tags.size === 0 ? SELECTED_TAGS.noSelectedTags : SELECTED_TAGS.title,
+      inlineKeyboard
+    );
 
-  await ctx.answerCbQuery();
+    await ctx.answerCbQuery();
+  } catch (error) {
+    await ctx.reply(BOT_MESSAGES.ERROR);
+
+    debug(error);
+  }
 }

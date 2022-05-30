@@ -10,7 +10,7 @@ export async function addSelectedSymbolToTag(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>,
   next: () => Promise<void>
 ) {
-  const { selectedTag } = ctx.state as ContextState;
+  const { selectedTag, debug } = ctx.state as ContextState;
 
   if (
     // Typing error in Telegraf.
@@ -21,7 +21,7 @@ export async function addSelectedSymbolToTag(
     !ctx.update.callback_query.data ||
     !selectedTag
   ) {
-    void ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(BOT_MESSAGES.ERROR);
 
     return;
   }
@@ -40,7 +40,15 @@ export async function addSelectedSymbolToTag(
     selectedTag.action === "ADD" ? ` ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}` : ""
   }`;
 
-  await ctx.editMessageReplyMarkup({ inline_keyboard });
+  try {
+    await ctx.editMessageReplyMarkup({ inline_keyboard });
 
-  await next();
+    await next();
+  } catch (error) {
+    await ctx.reply(BOT_MESSAGES.ERROR);
+
+    await ctx.answerCbQuery();
+
+    debug(error);
+  }
 }

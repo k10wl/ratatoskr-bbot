@@ -18,7 +18,8 @@ export const BOT_MESSAGES = {
     CANCELED: "Canceled post creation. ✂️",
   },
 
-  ERROR: "Something went wrong. Please try again in few minutes.",
+  ERROR:
+    "Something went wrong 🐜.\n\nPlease, notify administrator about this error. Specify each step which lead to this error 📝.\nIf possible - try to record video 📽 with steps to reproduce this bug.\n\nUnfortunately it is unsafe to continue 😔.\nYou have to try again from scratch.",
 } as const;
 
 export const CONSOLE_STATEMENTS = {

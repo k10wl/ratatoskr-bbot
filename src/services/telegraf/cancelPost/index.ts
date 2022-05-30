@@ -4,9 +4,13 @@ import { MountMap } from "telegraf/typings/telegram-types";
 import { BOT_MESSAGES } from "@src/constants";
 import { getCurrentTagsSet, removeCurrentTagsSet } from "@src/services";
 
+import { ContextState } from "@src/types";
+
 export async function canselPost(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
+  const { debug } = ctx.state as ContextState;
+
   if (!ctx.update.callback_query.message) {
     await ctx.reply(BOT_MESSAGES.ERROR);
 
@@ -23,9 +27,17 @@ export async function canselPost(
     ctx.update.callback_query.message
   );
 
-  messages.forEach((message) => void ctx.deleteMessage(message.message_id));
+  try {
+    messages.forEach((message) => void ctx.deleteMessage(message.message_id));
 
-  await ctx.answerCbQuery(BOT_MESSAGES.TAGS.CANCELED);
+    await ctx.answerCbQuery(BOT_MESSAGES.TAGS.CANCELED);
 
-  await ctx.deleteMessage();
+    await ctx.deleteMessage();
+  } catch (error) {
+    await ctx.reply(BOT_MESSAGES.ERROR);
+
+    await ctx.answerCbQuery();
+
+    debug(error);
+  }
 }
