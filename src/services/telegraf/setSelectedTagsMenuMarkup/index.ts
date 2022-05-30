@@ -18,10 +18,10 @@ export async function setSelectedTagsMenuMarkup(
     return;
   }
 
-  const { tags } = getCurrentTagsSet(
-    ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message
-  );
+  const { tags } = getCurrentTagsSet({
+    userId: ctx.update.callback_query.from.id,
+    message: ctx.update.callback_query.message,
+  });
 
   const tagsList = [...tags].map((tag) => ({
     text: tags.has(tag) ? `${tag} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}` : tag,

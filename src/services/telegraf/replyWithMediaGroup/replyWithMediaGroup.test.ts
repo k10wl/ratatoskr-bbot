@@ -158,6 +158,7 @@ describe("replyWithMediaGroup", () => {
 
       expect(mockContext.state).toEqual({
         reply: completedCreation.newMediaGroup,
+        newMediaGroup: [1, 2],
       });
 
       expect(mockReplyWithChatAction).not.toBeCalled();

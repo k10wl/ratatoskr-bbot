@@ -24,10 +24,10 @@ export async function setGroupTagsMenuMarkup(
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
-  const { tags: storedTags } = getCurrentTagsSet(
-    ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message
-  );
+  const { tags: storedTags } = getCurrentTagsSet({
+    userId: ctx.update.callback_query.from.id,
+    message: ctx.update.callback_query.message,
+  });
 
   const { tags, groupName } = tagGroup;
 

@@ -11,7 +11,7 @@ export async function sendMenuMessage(
   ctx: NarrowedContext<Context, MountMap["photo" | "video" | "animation"]>,
   next: () => Promise<void>
 ) {
-  const { reply } = ctx.state as ContextState;
+  const { reply, newMediaGroup } = ctx.state as ContextState;
 
   if (!reply || !reply.length) {
     return next();
@@ -34,5 +34,10 @@ export async function sendMenuMessage(
 
   const replyMessage = await ctx.reply(TAG_GROUPS.title, inlineKeyboard);
 
-  getCurrentTagsSet(ctx.from.id, replyMessage, reply);
+  getCurrentTagsSet({
+    userId: ctx.from.id,
+    message: replyMessage,
+    replyMessages: reply,
+    mediaGroup: newMediaGroup || [],
+  });
 }

@@ -6,6 +6,7 @@ import {
   addTagToMedia,
   canselPost,
   saveTagInSet,
+  sendPostToGroup,
   setGroupTagsMenuMarkup,
   setSelectedTagsMenuMarkup,
   setTagsMenuMarkup,
@@ -28,6 +29,7 @@ export function mediaReplyActions() {
   );
 
   composer.action("cancel", canselPost);
+  composer.action("send_post", sendPostToGroup);
 
   return composer;
 }

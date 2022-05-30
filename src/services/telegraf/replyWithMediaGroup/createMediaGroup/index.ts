@@ -7,6 +7,8 @@ import {
 } from "telegraf/typings/core/types/typegram";
 import { MountMap } from "telegraf/typings/telegram-types";
 
+import { MediaMessageT } from "@src/types";
+
 type MediaGroupMapT = Map<
   string,
   {
@@ -18,8 +20,6 @@ type MediaGroupMapT = Map<
 >;
 
 export type ChatsMapT = Map<number, MediaGroupMapT>;
-
-type MediaMessageT = InputMediaPhoto | InputMediaVideo;
 
 type CreateMediaGroupT = Promise<{
   newMediaGroup: MediaMessageT[];

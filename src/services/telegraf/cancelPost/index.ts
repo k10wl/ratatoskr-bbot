@@ -17,10 +17,10 @@ export async function canselPost(
     return;
   }
 
-  const { messages } = getCurrentTagsSet(
-    ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message
-  );
+  const { messages } = getCurrentTagsSet({
+    userId: ctx.update.callback_query.from.id,
+    message: ctx.update.callback_query.message,
+  });
 
   removeCurrentTagsSet(
     ctx.update.callback_query.from.id,

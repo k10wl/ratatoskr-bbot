@@ -23,6 +23,7 @@ export async function replyWithMediaGroup(
   }
 
   ctx.state.reply = await ctx.replyWithMediaGroup(newMediaGroup);
+  ctx.state.newMediaGroup = newMediaGroup;
 
   originalMediaGroup.forEach((message) => {
     void ctx.deleteMessage(message.message_id);

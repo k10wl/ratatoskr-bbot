@@ -14,10 +14,10 @@ export async function saveTagInSet(
     return;
   }
 
-  const { tags } = getCurrentTagsSet(
-    ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message
-  );
+  const { tags } = getCurrentTagsSet({
+    userId: ctx.update.callback_query.from.id,
+    message: ctx.update.callback_query.message,
+  });
 
   const [, userChoseTag] = ctx.update.callback_query.data.split("-");
 

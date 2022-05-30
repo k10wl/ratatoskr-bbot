@@ -13,13 +13,14 @@ export const BOT_MESSAGES = {
     UPDATING_TAGS: "⏳ Updating tags, please wait",
     WRONG_MESSAGE:
       "❗❗❗Tags update failure❗❗❗\n\nIncorrect message. Please, double check your actions. 👀",
-    TAGS_UPDATED: "Tags list updated successfully. ✅",
+    TAGS_UPDATED: "✅ Tags list updated successfully. ✍️",
     SELECTED_SYMBOL: "🌰",
-    CANCELED: "Canceled post creation. ✂️",
+    CANCELED: "❌ Canceled post creation. ✂️",
+    POST_FORWARDED: "✅ Post successfully forwarded. 🐿",
   },
 
   ERROR:
-    "Something went wrong 🐜.\n\nPlease, notify administrator about this error. Specify each step which lead to this error 📝.\nIf possible - try to record video 📽 with steps to reproduce this bug.\n\nUnfortunately it is unsafe to continue 😔.\nYou have to try again from scratch.",
+    "Something went wrong. 🐜\n\nPlease, notify administrator about this error. Specify each step which lead to this error. 📝\nIf possible - try to record video 📽 with steps to reproduce this bug.\n\nUnfortunately it is unsafe to continue. 😔\nYou have to try again from scratch.",
 } as const;
 
 export const CONSOLE_STATEMENTS = {

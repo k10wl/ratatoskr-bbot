@@ -13,6 +13,7 @@ export * from "./replyWithVideo";
 export * from "./saveTagInSet";
 export * from "./selectedTagsManagement";
 export * from "./sendMenuMessage";
+export * from "./sendPostToGroup";
 export * from "./setGroupTagsMenuMarkup";
 export * from "./setSelectedTagsMenuMarkup";
 export * from "./setTagsMenuMarkup";

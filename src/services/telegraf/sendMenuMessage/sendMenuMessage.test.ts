@@ -55,11 +55,12 @@ describe("sendMenuMessage", () => {
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
     expect(mockReply).toBeCalledWith(TAG_GROUPS.title);
-    expect(getCurrentTagsSet).toBeCalledWith(
-      mockContext.from.id,
-      TAG_GROUPS.title,
-      state.reply
-    );
+    expect(getCurrentTagsSet).toBeCalledWith({
+      userId: mockContext.from.id,
+      message: TAG_GROUPS.title,
+      replyMessages: state.reply,
+      mediaGroup: [],
+    });
 
     expect(mockNext).not.toBeCalled();
   });
