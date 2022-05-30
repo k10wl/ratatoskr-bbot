@@ -1,9 +1,11 @@
 const DEV_CONFIG = {
   BOT_TOKEN: process.env.DEV_BOT_TOKEN,
+  GROUP_ID: process.env.DEV_GROUP_ID,
 } as const;
 
 const PROD_CONFIG = {
   BOT_TOKEN: process.env.PROD_BOT_TOKEN,
+  GROUP_ID: process.env.PROD_GROUP_ID,
 } as const;
 
 const NODE_CONFIG = process.env.NODE_ENV === "PROD" ? PROD_CONFIG : DEV_CONFIG;
