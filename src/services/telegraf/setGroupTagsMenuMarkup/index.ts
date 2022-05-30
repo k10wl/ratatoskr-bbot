@@ -11,6 +11,8 @@ import { ContextState } from "@src/types";
 export async function setGroupTagsMenuMarkup(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
+  const { debug } = ctx.state as ContextState;
+
   if (!ctx.callbackQuery.data) {
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
@@ -18,19 +20,14 @@ export async function setGroupTagsMenuMarkup(
   const groupId = ctx.callbackQuery.data.split("-")[1];
 
   const tagGroup = await getOneTagGroupById(groupId);
-
   if (!tagGroup || !ctx.update.callback_query.message) {
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
-  const { tags: storedTags, messages } = getCurrentTagsSet(
+  const { tags: storedTags } = getCurrentTagsSet(
     ctx.update.callback_query.from.id,
     ctx.update.callback_query.message
   );
-
-  const { debug } = ctx.state as ContextState;
-
-  debug(messages);
 
   const { tags, groupName } = tagGroup;
 
@@ -45,7 +42,14 @@ export async function setGroupTagsMenuMarkup(
 
   const inlineKeyboard = createInlineKeyboard(mapMenu);
 
-  await ctx.editMessageText(`Currently browsing: ${groupName}`, inlineKeyboard);
+  try {
+    await ctx.editMessageText(
+      `Currently browsing: ${groupName}`,
+      inlineKeyboard
+    );
 
-  await ctx.answerCbQuery();
+    await ctx.answerCbQuery();
+  } catch (error) {
+    debug(error);
+  }
 }
