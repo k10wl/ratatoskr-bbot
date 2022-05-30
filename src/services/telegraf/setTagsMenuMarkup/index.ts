@@ -18,8 +18,9 @@ export async function setTagsMenuMarkup(
 
   const tagGroups = sortedTags.map((tag) => ({
     text: tag.groupName,
-    callback: `getTagsByGroupId-${tag._id.toString()}`,
+    callback: `getTagsByGroupId/${tag._id.toString()}`,
   }));
+  debug(tagGroups, "TAG GROUPS");
 
   const combinedMenuButtons = [...tagGroups, ...TAG_GROUPS.structure];
 

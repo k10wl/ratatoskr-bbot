@@ -19,14 +19,23 @@ export async function saveTagInSet(
     message: ctx.update.callback_query.message,
   });
 
-  const [, userChoseTag] = ctx.update.callback_query.data.split("-");
+  const [, userChoseTag, tagGroup] =
+    ctx.update.callback_query.data.split(/\//gi);
 
-  if (tags.has(userChoseTag)) {
-    tags.delete(userChoseTag);
-    ctx.state.selectedTag = { name: userChoseTag, action: "REMOVE" };
+  if (tags.has(`${userChoseTag}/${tagGroup}`)) {
+    tags.delete(`${userChoseTag}/${tagGroup}`);
+    ctx.state.selectedTag = {
+      name: userChoseTag,
+      group: tagGroup,
+      action: "REMOVE",
+    };
   } else {
-    tags.add(userChoseTag);
-    ctx.state.selectedTag = { name: userChoseTag, action: "ADD" };
+    tags.add(`${userChoseTag}/${tagGroup}`);
+    ctx.state.selectedTag = {
+      name: userChoseTag,
+      group: tagGroup,
+      action: "ADD",
+    };
   }
 
   await next();

@@ -1,5 +1,6 @@
 export * from "./addSelectedSymbolToTag";
 export * from "./addTagToMedia";
+export * from "./addTagToStatistic";
 export * from "./addUserToState";
 export * from "./cancelPost";
 export * from "./filterRegisteredUser";

@@ -3,3 +3,4 @@ export * from "./dropTagGroups";
 export * from "./findOneRegisteredUserById";
 export * from "./getTagsMenu";
 export * from "./replaceTagGroup";
+export * from "./storeUsageStatistics";

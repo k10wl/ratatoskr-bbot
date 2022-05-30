@@ -25,7 +25,7 @@ export async function sendMenuMessage(
 
   const tagGroups = sortedTagsMenu.map((tag) => ({
     text: tag.groupName,
-    callback: `getTagsByGroupId-${tag._id.toString()}`,
+    callback: `getTagsByGroupId/${tag._id.toString()}`,
   }));
 
   const combinedMenuButtons = [...tagGroups, ...TAG_GROUPS.structure];

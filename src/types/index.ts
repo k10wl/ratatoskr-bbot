@@ -24,6 +24,7 @@ export type ContextState = {
   newMediaGroup?: MediaMessageT[];
   selectedTag?: {
     name: string;
+    group: string;
     action: "ADD" | "REMOVE";
   };
 };
@@ -42,4 +43,10 @@ export type TagsMenuT = {
 export type GroupInfoT = {
   groupId: number;
   tagsMessageId: number;
+};
+
+export type TagUsageStatisticT = {
+  group: string;
+  tag: string;
+  dateUsed: Date;
 };

@@ -22,12 +22,18 @@ export async function addTagToMedia(
     message: ctx.update.callback_query.message,
   });
 
+  const tagNames = [...tags].map((tag) => {
+    const [tagName] = tag.split(/\//gi);
+
+    return tagName;
+  });
+
   try {
     await ctx.telegram.editMessageCaption(
       messages[0].chat.id,
       messages[0].message_id,
       undefined,
-      [...tags].join("\n")
+      tagNames.join("\n")
     );
   } catch (error) {
     debug(error);

@@ -8,7 +8,8 @@ import { getCurrentTagsSet } from "@src/services";
 import { ContextState } from "@src/types";
 
 export async function sendPostToGroup(
-  ctx: NarrowedContext<Context, MountMap["callback_query"]>
+  ctx: NarrowedContext<Context, MountMap["callback_query"]>,
+  next: () => Promise<void>
 ) {
   const { debug } = ctx.state as ContextState;
 
@@ -42,12 +43,14 @@ export async function sendPostToGroup(
 
     await ctx.deleteMessage();
     await ctx.answerCbQuery(BOT_MESSAGES.TAGS.POST_FORWARDED);
+
+    await next();
+
+    return;
   } catch (error) {
     debug(error);
 
     await ctx.reply(BOT_MESSAGES.ERROR);
     await ctx.answerCbQuery();
   }
-
-  await ctx.answerCbQuery();
 }

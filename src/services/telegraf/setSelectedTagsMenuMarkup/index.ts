@@ -23,10 +23,16 @@ export async function setSelectedTagsMenuMarkup(
     message: ctx.update.callback_query.message,
   });
 
-  const tagsList = [...tags].map((tag) => ({
-    text: tags.has(tag) ? `${tag} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}` : tag,
-    callback: `tagSelected-${tag}`,
-  }));
+  const tagsList = [...tags].map((tag) => {
+    const [tagName] = tag.split(/\//gi);
+
+    return {
+      text: tags.has(tag)
+        ? `${tagName} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}`
+        : tagName,
+      callback: `tagSelected/${tag}`,
+    };
+  });
   const inlineKeyboard = createInlineKeyboard([
     ...tagsList,
     ...SELECTED_TAGS.structure,
