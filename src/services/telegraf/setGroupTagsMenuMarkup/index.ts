@@ -6,6 +6,8 @@ import { getCurrentMessageMap } from "@src/services";
 import { getOneTagGroupById } from "@src/services/mongoose/getOneTagGroupById";
 import { createInlineKeyboard } from "@src/utils";
 
+import { ContextState } from "@src/types";
+
 export async function setGroupTagsMenuMarkup(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
@@ -21,11 +23,14 @@ export async function setGroupTagsMenuMarkup(
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
-  const { tags: test } = getCurrentMessageMap(
+  const { tags: test, messages } = getCurrentMessageMap(
     ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message,
-    0
+    ctx.update.callback_query.message
   );
+
+  const { debug } = ctx.state as ContextState;
+
+  debug(messages);
 
   const { tags, groupName } = tagGroup;
 

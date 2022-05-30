@@ -16,8 +16,7 @@ export async function saveTagInSet(
 
   const { tags } = getCurrentMessageMap(
     ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message,
-    0
+    ctx.update.callback_query.message
   );
 
   const [, userChoseTag] = ctx.update.callback_query.data.split("-");

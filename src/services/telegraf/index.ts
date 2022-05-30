@@ -1,4 +1,5 @@
 export * from "./addSelectedSymbolToTag";
+export * from "./addTagToMedia";
 export * from "./addUserToState";
 export * from "./filterRegisteredUser";
 export * from "./getTagsGroupAndMessage";
