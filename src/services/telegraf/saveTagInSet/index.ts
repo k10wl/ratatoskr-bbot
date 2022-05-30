@@ -2,7 +2,7 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES } from "@src/constants";
-import { getCurrentMessageMap } from "@src/services";
+import { getCurrentTagsSet } from "@src/services";
 
 export async function saveTagInSet(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>,
@@ -14,7 +14,7 @@ export async function saveTagInSet(
     return;
   }
 
-  const { tags } = getCurrentMessageMap(
+  const { tags } = getCurrentTagsSet(
     ctx.update.callback_query.from.id,
     ctx.update.callback_query.message
   );

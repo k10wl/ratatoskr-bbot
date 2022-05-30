@@ -4,6 +4,7 @@ import { SELECTED_TAGS, TAG_GROUPS } from "@src/constants";
 import {
   addSelectedSymbolToTag,
   addTagToMedia,
+  canselPost,
   saveTagInSet,
   setGroupTagsMenuMarkup,
   setSelectedTagsMenuMarkup,
@@ -25,6 +26,8 @@ export function mediaReplyActions() {
     addSelectedSymbolToTag,
     addTagToMedia
   );
+
+  composer.action("cancel", canselPost);
 
   return composer;
 }

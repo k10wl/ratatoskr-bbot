@@ -2,7 +2,7 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES, SELECTED_TAGS } from "@src/constants";
-import { getCurrentMessageMap } from "@src/services";
+import { getCurrentTagsSet } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
 export async function setSelectedTagsMenuMarkup(
@@ -14,7 +14,7 @@ export async function setSelectedTagsMenuMarkup(
     return;
   }
 
-  const { tags } = getCurrentMessageMap(
+  const { tags } = getCurrentTagsSet(
     ctx.update.callback_query.from.id,
     ctx.update.callback_query.message
   );

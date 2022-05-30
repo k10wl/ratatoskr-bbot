@@ -2,7 +2,7 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { TAG_GROUPS } from "@src/constants";
-import { getCurrentMessageMap, getTagsMenu } from "@src/services";
+import { getCurrentTagsSet, getTagsMenu } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
 import { ContextState } from "@src/types";
@@ -34,5 +34,5 @@ export async function sendMenuMessage(
 
   const replyMessage = await ctx.reply(TAG_GROUPS.title, inlineKeyboard);
 
-  getCurrentMessageMap(ctx.from.id, replyMessage, reply);
+  getCurrentTagsSet(ctx.from.id, replyMessage, reply);
 }

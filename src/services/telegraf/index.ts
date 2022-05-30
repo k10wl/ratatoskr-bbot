@@ -1,6 +1,7 @@
 export * from "./addSelectedSymbolToTag";
 export * from "./addTagToMedia";
 export * from "./addUserToState";
+export * from "./cancelPost";
 export * from "./filterRegisteredUser";
 export * from "./getTagsGroupAndMessage";
 export * from "./processForwardedTags";
@@ -10,7 +11,7 @@ export * from "./replyWithMediaGroup";
 export * from "./replyWithPhoto";
 export * from "./replyWithVideo";
 export * from "./saveTagInSet";
-export * from "./selectedTags";
+export * from "./selectedTagsManagement";
 export * from "./sendMenuMessage";
 export * from "./setGroupTagsMenuMarkup";
 export * from "./setSelectedTagsMenuMarkup";

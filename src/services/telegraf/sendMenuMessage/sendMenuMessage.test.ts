@@ -1,11 +1,11 @@
 import { TAG_GROUPS } from "@src/constants";
-import { getCurrentMessageMap } from "@src/services";
+import { getCurrentTagsSet } from "@src/services";
 
 import { sendMenuMessage } from "./index";
 
 jest.mock("@src/services", () => ({
   getTagsMenu: () => [],
-  getCurrentMessageMap: jest.fn(),
+  getCurrentTagsSet: jest.fn(),
 }));
 
 const mockNext = jest.fn();
@@ -55,7 +55,7 @@ describe("sendMenuMessage", () => {
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
     expect(mockReply).toBeCalledWith(TAG_GROUPS.title);
-    expect(getCurrentMessageMap).toBeCalledWith(
+    expect(getCurrentTagsSet).toBeCalledWith(
       mockContext.from.id,
       TAG_GROUPS.title,
       state.reply

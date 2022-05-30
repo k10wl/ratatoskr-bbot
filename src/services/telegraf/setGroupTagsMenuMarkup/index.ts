@@ -2,7 +2,7 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES, ONE_GROUP_FOOTER_BUTTONS } from "@src/constants";
-import { getCurrentMessageMap } from "@src/services";
+import { getCurrentTagsSet } from "@src/services";
 import { getOneTagGroupById } from "@src/services/mongoose/getOneTagGroupById";
 import { createInlineKeyboard } from "@src/utils";
 
@@ -23,7 +23,7 @@ export async function setGroupTagsMenuMarkup(
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
-  const { tags: storedTags, messages } = getCurrentMessageMap(
+  const { tags: storedTags, messages } = getCurrentTagsSet(
     ctx.update.callback_query.from.id,
     ctx.update.callback_query.message
   );

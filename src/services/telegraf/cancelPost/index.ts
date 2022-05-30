@@ -2,9 +2,9 @@ import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES } from "@src/constants";
-import { getCurrentTagsSet } from "@src/services";
+import { getCurrentTagsSet, removeCurrentTagsSet } from "@src/services";
 
-export async function addTagToMedia(
+export async function canselPost(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
   if (!ctx.update.callback_query.message) {
@@ -13,17 +13,19 @@ export async function addTagToMedia(
     return;
   }
 
-  const { messages, tags } = getCurrentTagsSet(
+  const { messages } = getCurrentTagsSet(
     ctx.update.callback_query.from.id,
     ctx.update.callback_query.message
   );
 
-  await ctx.telegram.editMessageCaption(
-    messages[0].chat.id,
-    messages[0].message_id,
-    undefined,
-    [...tags].join("\n")
+  removeCurrentTagsSet(
+    ctx.update.callback_query.from.id,
+    ctx.update.callback_query.message
   );
 
-  await ctx.answerCbQuery();
+  messages.forEach((message) => void ctx.deleteMessage(message.message_id));
+
+  await ctx.answerCbQuery(BOT_MESSAGES.TAGS.CANCELED);
+
+  await ctx.deleteMessage();
 }

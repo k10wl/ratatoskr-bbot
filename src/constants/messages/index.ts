@@ -10,11 +10,12 @@ export const BOT_MESSAGES = {
   },
 
   TAGS: {
-    UPDATING_TAGS: "Updating tags, please wait",
+    UPDATING_TAGS: "⏳ Updating tags, please wait",
     WRONG_MESSAGE:
       "❗❗❗Tags update failure❗❗❗\n\nIncorrect message. Please, double check your actions. 👀",
     TAGS_UPDATED: "Tags list updated successfully. ✅",
     SELECTED_SYMBOL: "🌰",
+    CANCELED: "Canceled post creation. ✂️",
   },
 
   ERROR: "Something went wrong. Please try again in few minutes.",
