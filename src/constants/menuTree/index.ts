@@ -18,8 +18,9 @@ export const TAG_GROUPS: MenuInstanceT = {
   path: "root",
 };
 
-export const SELECTED_TAGS: MenuInstanceT = {
+export const SELECTED_TAGS: MenuInstanceT & { noSelectedTags: string } = {
   title: "Selected tags.",
+  noSelectedTags: "No tags selected.",
   structure: [
     [
       { text: "Tag groups..", callback: "root" },

@@ -23,7 +23,7 @@ export async function setGroupTagsMenuMarkup(
     return ctx.reply(BOT_MESSAGES.ERROR);
   }
 
-  const { tags: test, messages } = getCurrentMessageMap(
+  const { tags: storedTags, messages } = getCurrentMessageMap(
     ctx.update.callback_query.from.id,
     ctx.update.callback_query.message
   );
@@ -35,7 +35,9 @@ export async function setGroupTagsMenuMarkup(
   const { tags, groupName } = tagGroup;
 
   const tagsList = tags.map(({ tag }) => ({
-    text: test.has(tag) ? `${tag} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}` : tag,
+    text: storedTags.has(tag)
+      ? `${tag} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}`
+      : tag,
     callback: `tagSelected-${tag}`,
   }));
 
