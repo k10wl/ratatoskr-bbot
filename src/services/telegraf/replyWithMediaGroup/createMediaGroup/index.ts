@@ -1,10 +1,5 @@
 import { Context, NarrowedContext } from "telegraf";
-import {
-  InputMediaPhoto,
-  InputMediaVideo,
-  Message,
-  Update,
-} from "telegraf/typings/core/types/typegram";
+import { Message, Update } from "telegraf/typings/core/types/typegram";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { MediaMessageT } from "@src/types";
