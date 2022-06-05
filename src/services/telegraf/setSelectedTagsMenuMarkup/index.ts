@@ -36,12 +36,12 @@ export async function setSelectedTagsMenuMarkup(
   });
   const inlineKeyboard = createInlineKeyboard([
     ...tagsList,
-    ...SELECTED_TAGS.structure,
+    ...SELECTED_TAGS.STRUCTURE,
   ]);
 
   try {
     await ctx.editMessageText(
-      tags.size === 0 ? SELECTED_TAGS.noSelectedTags : SELECTED_TAGS.title,
+      tags.size === 0 ? SELECTED_TAGS.NO_SELECTED_TAGS : SELECTED_TAGS.TITLE,
       inlineKeyboard
     );
 

@@ -1,7 +1,7 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-import { TAG_GROUPS } from "@src/constants";
+import { MENU_ROOT } from "@src/constants";
 import { getCurrentTagsSet, getTagsMenu } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
@@ -28,11 +28,11 @@ export async function sendMenuMessage(
     callback: `getTagsByGroupId/${tag._id.toString()}`,
   }));
 
-  const combinedMenuButtons = [...tagGroups, ...TAG_GROUPS.structure];
+  const combinedMenuButtons = [...tagGroups, ...MENU_ROOT.STRUCTURE];
 
   const inlineKeyboard = createInlineKeyboard(combinedMenuButtons);
 
-  const replyMessage = await ctx.reply(TAG_GROUPS.title, inlineKeyboard);
+  const replyMessage = await ctx.reply(MENU_ROOT.TITLE, inlineKeyboard);
 
   getCurrentTagsSet({
     userId: ctx.from.id,

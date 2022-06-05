@@ -1,11 +1,12 @@
 import { Composer } from "telegraf";
 
-import { SELECTED_TAGS, TAG_GROUPS } from "@src/constants";
+import { MENU_ROOT, SELECTED_TAGS } from "@src/constants";
 import {
   addSelectedSymbolToTag,
   addTagToMedia,
   addTagToStatistic,
   canselPost,
+  cleanupTagSet,
   saveTagInSet,
   sendPostToGroup,
   setGroupTagsMenuMarkup,
@@ -16,9 +17,9 @@ import {
 export function mediaReplyActions() {
   const composer = new Composer();
 
-  composer.action(TAG_GROUPS.path, setTagsMenuMarkup);
+  composer.action(MENU_ROOT.PATH, setTagsMenuMarkup);
 
-  composer.action(SELECTED_TAGS.path, setSelectedTagsMenuMarkup);
+  composer.action(SELECTED_TAGS.PATH, setSelectedTagsMenuMarkup);
 
   composer.action(/^getTagsByGroupId\/.*/, setGroupTagsMenuMarkup);
 
@@ -29,8 +30,13 @@ export function mediaReplyActions() {
     addTagToMedia
   );
 
-  composer.action("cancel", canselPost);
-  composer.action("send_post", sendPostToGroup, addTagToStatistic);
+  composer.action("cancel", canselPost, cleanupTagSet);
+  composer.action(
+    "send_post",
+    sendPostToGroup,
+    addTagToStatistic,
+    cleanupTagSet
+  );
 
   return composer;
 }

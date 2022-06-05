@@ -3,6 +3,7 @@ export * from "./addTagToMedia";
 export * from "./addTagToStatistic";
 export * from "./addUserToState";
 export * from "./cancelPost";
+export * from "./cleanupTagSet";
 export * from "./filterRegisteredUser";
 export * from "./getTagsGroupAndMessage";
 export * from "./processForwardedTags";

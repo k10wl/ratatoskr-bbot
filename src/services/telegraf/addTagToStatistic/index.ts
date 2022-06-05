@@ -1,5 +1,6 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
+import { createDeflateRaw } from "zlib";
 
 import {
   getCurrentTagsSet,
@@ -7,8 +8,9 @@ import {
   storeUsageStatistics,
 } from "@src/services";
 
-export function addTagToStatistic(
-  ctx: NarrowedContext<Context, MountMap["callback_query"]>
+export async function addTagToStatistic(
+  ctx: NarrowedContext<Context, MountMap["callback_query"]>,
+  next: () => Promise<void>
 ) {
   const { tags } = getCurrentTagsSet({
     userId: ctx.update.callback_query.from.id,
@@ -18,11 +20,8 @@ export function addTagToStatistic(
   [...tags].forEach((tagGroupString) => {
     const [tag, group] = tagGroupString.split(/\//);
 
-    return void storeUsageStatistics({ group, tag });
+    void storeUsageStatistics({ group, tag });
   });
 
-  void removeCurrentTagsSet(
-    ctx.update.callback_query.from.id,
-    ctx.update.callback_query.message!
-  );
+  await next();
 }

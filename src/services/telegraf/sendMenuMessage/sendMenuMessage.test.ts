@@ -1,4 +1,4 @@
-import { TAG_GROUPS } from "@src/constants";
+import { MENU_ROOT } from "@src/constants";
 import { getCurrentTagsSet } from "@src/services";
 
 import { sendMenuMessage } from "./index";
@@ -54,10 +54,10 @@ describe("sendMenuMessage", () => {
 
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
-    expect(mockReply).toBeCalledWith(TAG_GROUPS.title);
+    expect(mockReply).toBeCalledWith(MENU_ROOT.TITLE);
     expect(getCurrentTagsSet).toBeCalledWith({
       userId: mockContext.from.id,
-      message: TAG_GROUPS.title,
+      message: MENU_ROOT.TITLE,
       replyMessages: state.reply,
       mediaGroup: [],
     });

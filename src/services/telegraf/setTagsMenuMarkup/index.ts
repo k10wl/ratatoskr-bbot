@@ -2,7 +2,7 @@ import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-import { BOT_MESSAGES, TAG_GROUPS } from "@src/constants";
+import { BOT_MESSAGES, MENU_ROOT } from "@src/constants";
 import { getTagsMenu } from "@src/services";
 import { createInlineKeyboard } from "@src/utils";
 
@@ -23,11 +23,11 @@ export async function setTagsMenuMarkup(
   }));
   debug(tagGroups, "TAG GROUPS");
 
-  const combinedMenuButtons = [...tagGroups, ...TAG_GROUPS.structure];
+  const combinedMenuButtons = [...tagGroups, ...MENU_ROOT.STRUCTURE];
 
   const inlineKeyboard = createInlineKeyboard(combinedMenuButtons);
   try {
-    await ctx.editMessageText(TAG_GROUPS.title, inlineKeyboard);
+    await ctx.editMessageText(MENU_ROOT.TITLE, inlineKeyboard);
 
     await ctx.answerCbQuery();
   } catch (error) {
