@@ -5,15 +5,12 @@ import { MountMap } from "telegraf/typings/telegram-types";
 import CONFIG from "@src/config";
 import { BOT_MESSAGES } from "@src/constants";
 import { getCurrentTagsSet } from "@src/services";
-
-import { ContextState } from "@src/types";
+import { debug } from "@src/utils";
 
 export async function sendPostToGroup(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>,
   next: () => Promise<void>
 ) {
-  const { debug } = ctx.state as ContextState;
-
   await ctx.replyWithChatAction("typing");
 
   if (!ctx.update.callback_query.message) {

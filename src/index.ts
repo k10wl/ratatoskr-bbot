@@ -1,20 +1,17 @@
 import "dotenv/config";
-import debugLib from "debug";
 import { Telegraf } from "telegraf";
 
 import CONFIG from "@src/config";
 import { CONSOLE_STATEMENTS } from "@src/constants";
 import { loadApp } from "@src/loaders";
-import { gracefulShutdown } from "@src/utils";
-
-const debug = debugLib(CONFIG.DEBUG_NAMESPACE);
+import { debug, gracefulShutdown } from "@src/utils";
 
 async function startServer() {
   const telegraf = new Telegraf(CONFIG.BOT_TOKEN as string);
 
-  await loadApp(telegraf, debug);
+  await loadApp(telegraf);
 
-  const shutDown = gracefulShutdown(debug, telegraf);
+  const shutDown = gracefulShutdown(telegraf);
   process.on("SIGINT", shutDown);
 }
 void startServer()

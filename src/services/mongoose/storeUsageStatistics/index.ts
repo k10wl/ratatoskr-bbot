@@ -1,7 +1,5 @@
-import debug from "debug";
-
-import CONFIG from "@src/config";
 import { TagsUsageStatistic } from "@src/models";
+import { debug } from "@src/utils";
 
 import { TagUsageStatisticT } from "@src/types";
 
@@ -19,6 +17,6 @@ export async function storeUsageStatistics({
 
     return newStatistics;
   } catch (error) {
-    debug(CONFIG.DEBUG_NAMESPACE)(error);
+    debug(error);
   }
 }

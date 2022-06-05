@@ -4,6 +4,7 @@ import * as tg from "telegraf/src/core/types/typegram";
 import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES } from "@src/constants";
+import { debug } from "@src/utils";
 
 import { ContextState } from "@src/types";
 
@@ -11,7 +12,7 @@ export async function addSelectedSymbolToTag(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>,
   next: () => Promise<void>
 ) {
-  const { selectedTag, debug } = ctx.state as ContextState;
+  const { selectedTag } = ctx.state as ContextState;
 
   if (
     // Typing error in Telegraf.

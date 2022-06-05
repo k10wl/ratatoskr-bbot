@@ -1,4 +1,3 @@
-import { Debugger } from "debug";
 import { Types } from "mongoose";
 import {
   InputMediaPhoto,
@@ -18,7 +17,6 @@ export type UserT = User & {
 export type MediaMessageT = InputMediaPhoto | InputMediaVideo;
 
 export type ContextState = {
-  debug: Debugger;
   reply: Message[];
   user: UserT;
   newMediaGroup?: MediaMessageT[];

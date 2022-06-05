@@ -4,14 +4,11 @@ import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES } from "@src/constants";
 import { getCurrentTagsSet, removeCurrentTagsSet } from "@src/services";
-
-import { ContextState } from "@src/types";
+import { debug } from "@src/utils";
 
 export async function canselPost(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
-  const { debug } = ctx.state as ContextState;
-
   if (!ctx.update.callback_query.message) {
     await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 

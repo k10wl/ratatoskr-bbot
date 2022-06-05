@@ -4,15 +4,11 @@ import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES, MENU_ROOT } from "@src/constants";
 import { getTagsMenu } from "@src/services";
-import { createInlineKeyboard } from "@src/utils";
-
-import { ContextState } from "@src/types";
+import { createInlineKeyboard, debug } from "@src/utils";
 
 export async function setTagsMenuMarkup(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
-  const { debug } = ctx.state as ContextState;
-
   const tagsMenu = await getTagsMenu();
 
   const sortedTags = tagsMenu.sort((a, b) => a.originalIndex - b.originalIndex);

@@ -4,15 +4,11 @@ import { MountMap } from "telegraf/typings/telegram-types";
 
 import { BOT_MESSAGES, SELECTED_TAGS } from "@src/constants";
 import { getCurrentTagsSet } from "@src/services";
-import { createInlineKeyboard } from "@src/utils";
-
-import { ContextState } from "@src/types";
+import { createInlineKeyboard, debug } from "@src/utils";
 
 export async function setSelectedTagsMenuMarkup(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>
 ) {
-  const { debug } = ctx.state as ContextState;
-
   if (!ctx.update.callback_query.message) {
     await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
