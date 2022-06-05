@@ -1,26 +1,16 @@
 export const BOT_MESSAGES = {
-  CANT_INTERACT_MESSAGE: `❗️❗️❗️RESTRICTED ACCESS❗️❗️❗️\n\nYou can't interact with Ratatoskr.\nIf you believe that this is a mistake - message developers.\n\nLeave in peace.  🐿️`,
-
-  TEXT_REACTION: {
-    PREFIX:
-      "Please send photo 📷 or video 📹 to create post.\nUse menu commands to manage bot. 🔧\n\n(This message will disappear in",
-    COUNTDOWN_SECONDS: 10,
-    SUFFIX: "seconds. 🥷)",
-    COUNTDOWN_STEP_SECONDS: 1,
-  },
-
-  TAGS: {
-    UPDATING_TAGS: "⏳ Updating tags, please wait",
-    WRONG_MESSAGE:
-      "❗❗❗Tags update failure❗❗❗\n\nIncorrect message. Please, double check your actions. 👀",
-    TAGS_UPDATED: "✅ Tags list updated successfully. ✍️",
-    SELECTED_SYMBOL: "🌰",
-    CANCELED: "❌ Canceled post creation. ✂️",
-    POST_FORWARDED: "✅ Post successfully forwarded. 🐿",
-  },
-
-  ERROR:
-    "Something went wrong. 🐜\n\nPlease, notify administrator about this error. Specify each step which lead to this error. 📝\nIf possible - try to record video 📽 with steps to reproduce this bug.\n\nUnfortunately it is unsafe to continue. 😔\nYou have to try again from scratch.",
+  CANT_INTERACT_MESSAGE: "CANT_INTERACT_MESSAGE",
+  ERROR: "ERROR",
+  POST_CANCELED: "POST_CANCELED",
+  POST_FORWARDED: "POST_FORWARDED",
+  POST_TAGS_SELECTED_SYMBOL: "🌰",
+  TAGS_UPDATED: "TAGS_UPDATED",
+  TAGS_UPDATING_TAGS: "TAGS_UPDATING_TAGS",
+  TAGS_WRONG_MESSAGE: "TAGS_WRONG_MESSAGE",
+  TEXT_REACTION_COUNTDOWN_SECONDS: 10,
+  TEXT_REACTION_COUNTDOWN_STEP_SECONDS: 1,
+  TEXT_REACTION_PREFIX: "TEXT_REACTION_PREFIX",
+  TEXT_REACTION_SUFFIX: "TEXT_REACTION_SUFFIX",
 } as const;
 
 export const CONSOLE_STATEMENTS = {

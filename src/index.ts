@@ -17,7 +17,6 @@ async function startServer() {
   const shutDown = gracefulShutdown(debug, telegraf);
   process.on("SIGINT", shutDown);
 }
-
 void startServer()
   .then(() => debug(CONSOLE_STATEMENTS.RATATOSKR.LAUNCH.SUCCESS))
   .catch(() => debug(CONSOLE_STATEMENTS.RATATOSKR.LAUNCH.ERROR));

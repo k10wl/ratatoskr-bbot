@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
@@ -8,7 +9,7 @@ import { UserT } from "@src/types";
 
 export async function addUserToState(ctx: Context<Update>, next: () => void) {
   if (!ctx.from) {
-    return ctx.reply(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
+    return ctx.reply(i18n.__(BOT_MESSAGES.CANT_INTERACT_MESSAGE));
   }
 
   const user: UserT = {

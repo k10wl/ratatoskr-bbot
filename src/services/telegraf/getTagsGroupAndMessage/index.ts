@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
@@ -19,5 +20,5 @@ export async function getTagsGroupAndMessage(
     return next();
   }
 
-  await ctx.reply(BOT_MESSAGES.TAGS.WRONG_MESSAGE);
+  await ctx.reply(i18n.__(BOT_MESSAGES.TAGS_WRONG_MESSAGE));
 }

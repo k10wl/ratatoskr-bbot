@@ -14,14 +14,14 @@ export async function setGroupTagsMenuMarkup(
   const { debug } = ctx.state as ContextState;
 
   if (!ctx.callbackQuery.data) {
-    return ctx.reply(BOT_MESSAGES.ERROR);
+    return ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
   }
 
   const groupId = ctx.callbackQuery.data.split(/\//gi)[1];
 
   const tagGroup = await getOneTagGroupById(groupId);
   if (!tagGroup || !ctx.update.callback_query.message) {
-    return ctx.reply(BOT_MESSAGES.ERROR);
+    return ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
   }
 
   const { tags: storedTags } = getCurrentTagsSet({
@@ -33,7 +33,7 @@ export async function setGroupTagsMenuMarkup(
 
   const tagsList = tags.map(({ tag }) => ({
     text: storedTags.has(`${tag}/${groupName}`)
-      ? `${tag} ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}`
+      ? `${tag} ${BOT_MESSAGES.POST_TAGS_SELECTED_SYMBOL}`
       : tag,
     callback: `tagSelected/${tag}/${groupName}`,
   }));

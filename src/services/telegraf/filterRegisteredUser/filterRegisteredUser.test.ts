@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
@@ -25,7 +26,9 @@ describe("filterRegisteredUser", () => {
     );
 
     expect(mockTgNext).not.toBeCalled();
-    expect(mockTgReply).toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
+    expect(mockTgReply).toBeCalledWith(
+      i18n.__(BOT_MESSAGES.CANT_INTERACT_MESSAGE)
+    );
   });
 
   test("should only call next if user is registered.", async () => {

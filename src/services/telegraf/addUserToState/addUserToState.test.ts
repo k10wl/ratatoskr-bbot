@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context } from "telegraf";
 import { Update, User } from "telegraf/typings/core/types/typegram";
 
@@ -32,7 +33,9 @@ describe("addUserToState", () => {
     await addUserToState(mockTgContext, mockTgNext);
 
     expect(mockTgNext).not.toBeCalled();
-    expect(mockTgReply).toBeCalledWith(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
+    expect(mockTgReply).toBeCalledWith(
+      i18n.__(BOT_MESSAGES.CANT_INTERACT_MESSAGE)
+    );
   });
 
   test("should populate state with unregistered user and call next if message is from user", async () => {

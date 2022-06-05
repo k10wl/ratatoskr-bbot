@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
@@ -12,7 +13,7 @@ export async function canselPost(
   const { debug } = ctx.state as ContextState;
 
   if (!ctx.update.callback_query.message) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
     return;
   }
@@ -30,11 +31,11 @@ export async function canselPost(
   try {
     messages.forEach((message) => void ctx.deleteMessage(message.message_id));
 
-    await ctx.answerCbQuery(BOT_MESSAGES.TAGS.CANCELED);
+    await ctx.answerCbQuery(i18n.__(BOT_MESSAGES.POST_CANCELED));
 
     await ctx.deleteMessage();
   } catch (error) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
     await ctx.answerCbQuery();
 

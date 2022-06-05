@@ -53,7 +53,7 @@ describe("replyToTextMessage", () => {
     expect(mockNext).not.toBeCalled();
     expect(mockReplySpy).toBeCalled();
     expect(mockEditMessageText).toBeCalledTimes(
-      BOT_MESSAGES.TEXT_REACTION.COUNTDOWN_SECONDS
+      BOT_MESSAGES.TEXT_REACTION_COUNTDOWN_SECONDS
     );
     expect(mockDelete).toHaveBeenNthCalledWith(1, 1);
     expect(mockDelete).toHaveBeenNthCalledWith(2, 2);

@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import * as tg from "telegraf/src/core/types/typegram";
 import { MountMap } from "telegraf/typings/telegram-types";
@@ -21,7 +22,7 @@ export async function addSelectedSymbolToTag(
     !ctx.update.callback_query.data ||
     !selectedTag
   ) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(i18n.__(BOT_MESSAGES.ERROR)));
 
     return;
   }
@@ -37,7 +38,9 @@ export async function addSelectedSymbolToTag(
   );
 
   inline_keyboard[updateIndex][0].text = `${selectedTag.name}${
-    selectedTag.action === "ADD" ? ` ${BOT_MESSAGES.TAGS.SELECTED_SYMBOL}` : ""
+    selectedTag.action === "ADD"
+      ? ` ${BOT_MESSAGES.POST_TAGS_SELECTED_SYMBOL}`
+      : ""
   }`;
 
   try {
@@ -45,7 +48,7 @@ export async function addSelectedSymbolToTag(
 
     await next();
   } catch (error) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
     await ctx.answerCbQuery();
 

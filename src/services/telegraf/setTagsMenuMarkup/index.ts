@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
@@ -30,7 +31,7 @@ export async function setTagsMenuMarkup(
 
     await ctx.answerCbQuery();
   } catch (error) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
     debug(error);
   }

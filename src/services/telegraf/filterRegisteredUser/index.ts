@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context } from "telegraf";
 import { Update } from "telegraf/typings/core/types/typegram";
 
@@ -15,5 +16,5 @@ export async function filterRegisteredUser(
     return next();
   }
 
-  await ctx.reply(BOT_MESSAGES.CANT_INTERACT_MESSAGE);
+  await ctx.reply(i18n.__(BOT_MESSAGES.CANT_INTERACT_MESSAGE));
 }

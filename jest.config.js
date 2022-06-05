@@ -5,6 +5,7 @@ module.exports = {
   transform: {
     "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest",
   },
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   transformIgnorePatterns: ["node_modules/(?!variables/.*)"],
   moduleNameMapper: {
     "^@src(.*)$": "<rootDir>/src$1",

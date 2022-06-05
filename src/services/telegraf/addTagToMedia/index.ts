@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
@@ -12,7 +13,7 @@ export async function addTagToMedia(
   const { debug } = ctx.state as ContextState;
 
   if (!ctx.update.callback_query.message) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
     return;
   }
@@ -38,7 +39,7 @@ export async function addTagToMedia(
   } catch (error) {
     debug(error);
 
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
   }
 
   await ctx.answerCbQuery();

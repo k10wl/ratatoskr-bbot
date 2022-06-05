@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
@@ -16,26 +17,30 @@ export async function replyToTextMessage(
     return next();
   }
 
-  let countdown = BOT_MESSAGES.TEXT_REACTION.COUNTDOWN_SECONDS;
+  let countdown = BOT_MESSAGES.TEXT_REACTION_COUNTDOWN_SECONDS;
 
   const replyMessage = await ctx.reply(
-    `${BOT_MESSAGES.TEXT_REACTION.PREFIX} ${countdown} ${BOT_MESSAGES.TEXT_REACTION.SUFFIX}`
+    `${i18n.__(BOT_MESSAGES.TEXT_REACTION_PREFIX)} ${countdown} ${i18n.__(
+      BOT_MESSAGES.TEXT_REACTION_SUFFIX
+    )}`
   );
 
   await ctx.deleteMessage(ctx.message.message_id);
 
   const interval = setInterval(async () => {
-    countdown -= BOT_MESSAGES.TEXT_REACTION.COUNTDOWN_STEP_SECONDS;
+    countdown -= BOT_MESSAGES.TEXT_REACTION_COUNTDOWN_STEP_SECONDS;
     await ctx.telegram.editMessageText(
       replyMessage.chat.id,
       replyMessage.message_id,
       undefined,
-      `${BOT_MESSAGES.TEXT_REACTION.PREFIX} ${countdown} ${BOT_MESSAGES.TEXT_REACTION.SUFFIX}`
+      `${i18n.__(BOT_MESSAGES.TEXT_REACTION_PREFIX)} ${countdown} ${i18n.__(
+        BOT_MESSAGES.TEXT_REACTION_SUFFIX
+      )}`
     );
-  }, BOT_MESSAGES.TEXT_REACTION.COUNTDOWN_STEP_SECONDS * 1000);
+  }, BOT_MESSAGES.TEXT_REACTION_COUNTDOWN_STEP_SECONDS * 1000);
 
   setTimeout(async () => {
     clearInterval(interval);
     await ctx.deleteMessage(replyMessage.message_id);
-  }, BOT_MESSAGES.TEXT_REACTION.COUNTDOWN_SECONDS * 1000);
+  }, BOT_MESSAGES.TEXT_REACTION_COUNTDOWN_SECONDS * 1000);
 }

@@ -15,7 +15,7 @@ export async function processForwardedTags(
 
   const tagsObject = parseTags(ctx.message.text);
 
-  const reply = await ctx.reply(BOT_MESSAGES.TAGS.UPDATING_TAGS);
+  const reply = await ctx.reply(i18n.__(BOT_MESSAGES.TAGS_UPDATING_TAGS));
 
   let dots = "";
   const interval = setInterval(() => {
@@ -44,14 +44,14 @@ export async function processForwardedTags(
       reply.chat.id,
       reply.message_id,
       undefined,
-      BOT_MESSAGES.TAGS.TAGS_UPDATED
+      i18n.__(BOT_MESSAGES.TAGS_UPDATED)
     );
   } catch (error) {
     await ctx.telegram.editMessageText(
       reply.chat.id,
       reply.message_id,
       undefined,
-      BOT_MESSAGES.ERROR
+      i18n.__(BOT_MESSAGES.ERROR)
     );
   }
 }

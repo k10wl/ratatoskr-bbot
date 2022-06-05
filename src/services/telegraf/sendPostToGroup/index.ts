@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
@@ -16,7 +17,7 @@ export async function sendPostToGroup(
   await ctx.replyWithChatAction("typing");
 
   if (!ctx.update.callback_query.message) {
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
 
     return;
   }
@@ -42,7 +43,7 @@ export async function sendPostToGroup(
     }
 
     await ctx.deleteMessage();
-    await ctx.answerCbQuery(BOT_MESSAGES.TAGS.POST_FORWARDED);
+    await ctx.answerCbQuery(i18n.__(BOT_MESSAGES.POST_FORWARDED));
 
     await next();
 
@@ -50,7 +51,7 @@ export async function sendPostToGroup(
   } catch (error) {
     debug(error);
 
-    await ctx.reply(BOT_MESSAGES.ERROR);
+    await ctx.reply(i18n.__(BOT_MESSAGES.ERROR));
     await ctx.answerCbQuery();
   }
 }

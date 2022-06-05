@@ -1,0 +1,12 @@
+{
+  "CANT_INTERACT_MESSAGE": "❗️❗️❗️RESTRICTED ACCESS❗️❗️❗️\n\nYou can't interact with Ratatoskr.\nIf you believe that this is a mistake - message developers.\n\nLeave in peace.  🐿️",
+  "TEXT_REACTION_PREFIX": "Please send photo 📷 or video 📹 to create post.\nUse menu commands to manage bot. 🔧\n\n(This message will disappear in",
+  "TEXT_REACTION_SUFFIX": "seconds. 🥷)",
+  "TAGS_UPDATING_TAGS": "⏳ Updating tags, please wait",
+  "TAGS_WRONG_MESSAGE": "❗❗❗Tags update failure❗❗❗\n\nIncorrect message. Please, double check your actions. \uD83D\uDC40",
+  "TAGS_UPDATED": "✅ Tags list updated successfully. ✍️",
+  "POST_TAGS_SELECTED_SYMBOL": "🌰",
+  "POST_CANCELED": "❌ Canceled post creation. ✂️",
+  "POST_POST_FORWARDED": "✅ Post successfully forwarded. 🐿",
+  "ERROR": "Something went wrong. 🐜 \n\nPlease, notify administrator about this error. Specify each step which lead to this error. 📝 \nIf possible - try to record video 📽 with steps to reproduce this bug.\n\nUnfortunately it is unsafe to continue. 😔 \nYou have to try again from scratch."
+}
