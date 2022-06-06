@@ -8,5 +8,5 @@ export function loadI18n() {
     directory: `locales`,
   });
 
-  i18n.setLocale(CONFIG.LOCALE || "en");
+  i18n.setLocale(CONFIG.LOCALE);
 }

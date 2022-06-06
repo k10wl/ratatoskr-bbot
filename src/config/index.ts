@@ -13,7 +13,9 @@ const NODE_CONFIG = process.env.NODE_ENV === "PROD" ? PROD_CONFIG : DEV_CONFIG;
 const SHARED_CONFIG = {
   DEBUG_NAMESPACE: "Ratatoskr:DEV",
   MONGO_DATABASE_CONNECTION: process.env.MONGO_DATABASE_CONNECTION,
-  LOCALE: process.env.LOCALE,
+  LOCALE: process.env.LOCALE || "en",
+  URL: process.env.URL,
+  PORT: Number(process.env.PORT) || 3000,
 };
 
 const CONFIG = { ...NODE_CONFIG, ...SHARED_CONFIG };
