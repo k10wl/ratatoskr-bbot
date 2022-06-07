@@ -27,7 +27,7 @@ export async function setSelectedTagsMenuMarkup(
       text: tags.has(tag)
         ? `${tagName} ${BOT_MESSAGES.POST_TAGS_SELECTED_SYMBOL}`
         : tagName,
-      callback: `tagSelected/${tag}`,
+      callback: `tag/${tag}`,
     };
   });
   const inlineKeyboard = createInlineKeyboard([

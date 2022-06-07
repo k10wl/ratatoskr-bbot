@@ -20,21 +20,21 @@ export async function saveTagInSet(
     message: ctx.update.callback_query.message,
   });
 
-  const [, userChoseTag, tagGroup] =
+  const [, userChoseTag, originalGroupIndex] =
     ctx.update.callback_query.data.split(/\//gi);
 
-  if (tags.has(`${userChoseTag}/${tagGroup}`)) {
-    tags.delete(`${userChoseTag}/${tagGroup}`);
+  if (tags.has(`${userChoseTag}/${originalGroupIndex}`)) {
+    tags.delete(`${userChoseTag}/${originalGroupIndex}`);
     ctx.state.selectedTag = {
       name: userChoseTag,
-      group: tagGroup,
+      group: originalGroupIndex,
       action: "REMOVE",
     };
   } else {
-    tags.add(`${userChoseTag}/${tagGroup}`);
+    tags.add(`${userChoseTag}/${originalGroupIndex}`);
     ctx.state.selectedTag = {
       name: userChoseTag,
-      group: tagGroup,
+      group: originalGroupIndex,
       action: "ADD",
     };
   }
