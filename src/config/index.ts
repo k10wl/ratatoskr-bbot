@@ -1,11 +1,13 @@
 const DEV_CONFIG = {
   BOT_TOKEN: process.env.DEV_BOT_TOKEN,
   GROUP_ID: process.env.DEV_GROUP_ID,
+  DB_NAME: "Ratatoskr_DB_DEV",
 } as const;
 
 const PROD_CONFIG = {
   BOT_TOKEN: process.env.PROD_BOT_TOKEN,
   GROUP_ID: process.env.PROD_GROUP_ID,
+  DB_NAME: "Ratatoskr_DB",
 } as const;
 
 const NODE_CONFIG = process.env.NODE_ENV === "PROD" ? PROD_CONFIG : DEV_CONFIG;
