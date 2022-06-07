@@ -23,6 +23,7 @@ export const CONSOLE_STATEMENTS = {
       SUCCESS: "Successfully connected to mongoose cluster.",
     },
     DISCONNECTED: "Mongoose connection gracefully closed.",
+    NO_DATA_FOUND: "No data found by your query.",
   },
 
   RATATOSKR: {

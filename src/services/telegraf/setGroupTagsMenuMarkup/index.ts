@@ -25,13 +25,13 @@ export async function setGroupTagsMenuMarkup(
     message: ctx.update.callback_query.message,
   });
 
-  const { tags, groupName } = tagGroup;
+  const { tags, groupName, originalIndex } = tagGroup;
 
   const tagsList = tags.map(({ tag }) => ({
-    text: storedTags.has(`${tag}/${groupName}`)
+    text: storedTags.has(`${tag}/${originalIndex}`)
       ? `${tag} ${BOT_MESSAGES.POST_TAGS_SELECTED_SYMBOL}`
       : tag,
-    callback: `tagSelected/${tag}/${groupName}`,
+    callback: `tagSelected/${tag}/${originalIndex}`,
   }));
 
   const mapMenu = [...tagsList, ...ONE_GROUP_FOOTER_BUTTONS];
@@ -46,6 +46,7 @@ export async function setGroupTagsMenuMarkup(
 
     await ctx.answerCbQuery();
   } catch (error) {
+    debug("caught error");
     debug(error);
   }
 }

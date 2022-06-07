@@ -1,7 +1,13 @@
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
-import { getCurrentTagsSet, storeUsageStatistics } from "@src/services";
+import { CONSOLE_STATEMENTS } from "@src/constants";
+import {
+  getCurrentTagsSet,
+  getOneTagGroupByOriginalIndex,
+  storeUsageStatistics,
+} from "@src/services";
+import { debug } from "@src/utils";
 
 export async function addTagToStatistic(
   ctx: NarrowedContext<Context, MountMap["callback_query"]>,
@@ -12,10 +18,18 @@ export async function addTagToStatistic(
     message: ctx.update.callback_query.message!,
   });
 
-  [...tags].forEach((tagGroupString) => {
-    const [tag, group] = tagGroupString.split(/\//);
+  [...tags].forEach(async (tagGroupString) => {
+    const [tag, groupIndex] = tagGroupString.split(/\//);
 
-    void storeUsageStatistics({ group, tag });
+    const tagGroup = await getOneTagGroupByOriginalIndex(groupIndex);
+
+    if (!tagGroup) {
+      debug(CONSOLE_STATEMENTS.MONGOOSE.NO_DATA_FOUND);
+
+      return;
+    }
+
+    await storeUsageStatistics({ group: tagGroup.groupName, tag });
   });
 
   await next();
