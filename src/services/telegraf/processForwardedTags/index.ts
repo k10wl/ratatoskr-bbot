@@ -1,3 +1,4 @@
+import i18n from "i18n";
 import { Context, NarrowedContext } from "telegraf";
 import { MountMap } from "telegraf/typings/telegram-types";
 
