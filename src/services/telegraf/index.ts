@@ -9,6 +9,7 @@ export * from "./getTagsGroupAndMessage";
 export * from "./processForwardedTags";
 export * from "./replyToTextMessage";
 export * from "./replyWithAnimation";
+export * from "./replyWithInfo";
 export * from "./replyWithMediaGroup";
 export * from "./replyWithPhoto";
 export * from "./replyWithVideo";

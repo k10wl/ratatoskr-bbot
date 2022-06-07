@@ -1,20 +1,21 @@
 import { Composer } from "telegraf";
 
-import { tagsManagement } from "@src/api/tagsManagement";
-import { replyToTextMessage } from "@src/services";
+import { replyToTextMessage, replyWithInfo } from "@src/services";
 
 import { mediaReplyActions } from "./mediaReplyActions";
 import { replyWithMedia } from "./replyWithMedia";
+import { tagsManagement } from "./tagsManagement";
 
 export function api() {
   const composer = new Composer();
 
   composer.use(replyWithMedia());
   composer.use(mediaReplyActions());
-
   composer.use(tagsManagement());
 
-  composer.on("message", replyToTextMessage);
+  composer.on("text", replyToTextMessage);
+
+  composer.command("info", replyWithInfo);
 
   return composer;
 }
