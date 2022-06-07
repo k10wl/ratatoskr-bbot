@@ -34,7 +34,13 @@ export async function sendPostToGroup(
     }
 
     if (messages.length > 1 && mediaGroup.length > 0) {
-      mediaGroup[0].caption = [...tags].join("\n");
+      const mappedTags = [...tags].map((tagInstance) => {
+        const [tag] = tagInstance.split("/");
+
+        return tag;
+      });
+
+      mediaGroup[0].caption = mappedTags.join("\n");
 
       await ctx.telegram.sendMediaGroup(CONFIG.GROUP_ID!, mediaGroup);
     }
