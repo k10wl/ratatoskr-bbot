@@ -17,6 +17,8 @@ export async function sendMenuMessage(
     return next();
   }
 
+  await ctx.replyWithChatAction("upload_photo");
+
   const mongoTagsMenu = await getTagsMenu();
 
   const sortedTagsMenu = mongoTagsMenu.sort(

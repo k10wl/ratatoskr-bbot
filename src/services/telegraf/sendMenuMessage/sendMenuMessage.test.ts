@@ -10,6 +10,8 @@ jest.mock("@src/services", () => ({
 
 const mockNext = jest.fn();
 
+const mockReplyWithChatAction = jest.fn();
+
 const mockReply = jest.fn();
 const mockReplyFn = (args: never) => {
   mockReply(args);
@@ -21,6 +23,7 @@ const mockContext = {
   state: {},
   from: { id: 1 },
   reply: mockReplyFn,
+  replyWithChatAction: mockReplyWithChatAction,
 };
 
 const replyMessage = {
@@ -36,7 +39,7 @@ describe("sendMenuMessage", () => {
     await sendMenuMessage(mockContext as never, mockNext);
 
     expect(mockNext).toBeCalled();
-
+    expect(mockReplyWithChatAction).not.toBeCalled();
     expect(mockReply).not.toBeCalled();
   });
   test("should only call next if state reply array is empty", async () => {
@@ -45,7 +48,7 @@ describe("sendMenuMessage", () => {
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
     expect(mockNext).toBeCalled();
-
+    expect(mockReplyWithChatAction).not.toBeCalled();
     expect(mockReply).not.toBeCalled();
   });
 
@@ -55,6 +58,7 @@ describe("sendMenuMessage", () => {
     await sendMenuMessage({ ...mockContext, state } as never, mockNext);
 
     expect(mockReply).toBeCalledWith(MENU_ROOT.TITLE);
+    expect(mockReplyWithChatAction).lastCalledWith("upload_photo");
     expect(getCurrentTagsSet).toBeCalledWith({
       userId: mockContext.from.id,
       message: MENU_ROOT.TITLE,
