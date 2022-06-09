@@ -36,6 +36,13 @@ const mockContext = {
 
 const initialMessage = {};
 
+beforeAll(() => {
+  jest.useFakeTimers();
+});
+afterAll(() => {
+  jest.useRealTimers();
+});
+
 describe("replyToTextMessage", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -48,7 +55,7 @@ describe("replyToTextMessage", () => {
       mockNext
     );
 
-    jest.runAllTimers();
+    jest.runOnlyPendingTimers();
 
     expect(mockNext).not.toBeCalled();
     expect(mockReplySpy).toBeCalled();
