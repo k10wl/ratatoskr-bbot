@@ -9,7 +9,6 @@ import { debug } from "@src/utils";
 export async function loadTelegraf(telegraf: Telegraf) {
   try {
     telegraf.use(auth());
-
     telegraf.use(api());
 
     if (CONFIG.URL) {
