@@ -17,3 +17,6 @@ log
 
 # Environment
 .env
+
+# Build
+build

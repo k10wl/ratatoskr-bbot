@@ -8,6 +8,6 @@ import { loadTelegraf } from "./telegraf";
 export async function loadApp(telegraf: Telegraf): Promise<void> {
   loadI18n();
   await loadMongoose();
-  await loadTelegraf(telegraf);
-  loadExpress();
+  loadTelegraf(telegraf);
+  loadExpress(telegraf);
 }

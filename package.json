@@ -1,13 +1,16 @@
 {
   "name": "ratatoskr_bbot",
-  "version": "3.0",
+  "version": "3.0.1",
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "nodemon -r tsconfig-paths/register src/index.ts",
+    "dev:run": "ts-node -r tsconfig-paths/register src/index.ts",
+    "dev:watch": "nodemon -r tsconfig-paths/register src/index.ts",
+    "start": "node build/index.js",
+    "clean": "rm -rf build",
+    "build": "yarn clean && yarn tsc --project tsconfig.build.json && yarn tsc-alias",
     "test": "jest",
-    "eslint-fix": "eslint --fix .",
+    "eslint:fix": "eslint --fix .",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -35,10 +38,12 @@
     "husky": "^8.0.1",
     "jest": "^28.1.1",
     "nodemon": "^2.0.16",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
     "prettier-eslint": "^15.0.1",
     "ts-jest": "^28.0.4",
     "ts-node": "^10.8.1",
+    "tsc-alias": "^1.8.2",
     "tsconfig-paths": "^4.0.0",
     "typescript": "^4.7.3"
   }

@@ -1,10 +1,11 @@
 import express from "express";
+import { Telegraf } from "telegraf";
 
 import CONFIG from "@src/config";
 import { CONSOLE_STATEMENTS } from "@src/constants";
 import { debug } from "@src/utils";
 
-export const loadExpress = () => {
+export function loadExpress(telegraf: Telegraf) {
   try {
     const server = express();
 
@@ -14,7 +15,9 @@ export const loadExpress = () => {
       res.status(200).json({ message: "Ratatoskr is live!", status: 200 });
     });
 
-    server.listen(CONFIG.PORT, () => {
+    server.listen(CONFIG.PORT, async () => {
+      await telegraf.launch();
+
       debug(
         `${CONSOLE_STATEMENTS.EXPRESS.LAUNCH.SUCCESS}${
           CONFIG.URL || "http://localhost"
@@ -25,4 +28,4 @@ export const loadExpress = () => {
     debug(CONSOLE_STATEMENTS.EXPRESS.LAUNCH.ERROR);
     debug(error);
   }
-};
+}
