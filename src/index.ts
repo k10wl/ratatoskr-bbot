@@ -10,6 +10,7 @@ async function startServer() {
   const telegraf = new Telegraf(CONFIG.BOT_TOKEN as string);
 
   await loadApp(telegraf);
+  await telegraf.launch();
 
   const shutDown = gracefulShutdown(telegraf);
   process.on("SIGINT", shutDown);

@@ -9,5 +9,5 @@ export async function loadApp(telegraf: Telegraf): Promise<void> {
   loadI18n();
   await loadMongoose();
   loadTelegraf(telegraf);
-  loadExpress(telegraf);
+  await loadExpress();
 }
