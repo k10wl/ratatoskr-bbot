@@ -17,7 +17,7 @@ const SHARED_CONFIG = {
   MONGO_DATABASE_CONNECTION: process.env.MONGO_DATABASE_CONNECTION,
   LOCALE: process.env.LOCALE || "en",
   URL: process.env.URL,
-  PORT: Number(process.env.PORT) || 3000,
+  PORT: Number(process.env.PORT),
 };
 
 const CONFIG = { ...NODE_CONFIG, ...SHARED_CONFIG };

@@ -15,6 +15,13 @@ export const BOT_MESSAGES = {
 } as const;
 
 export const CONSOLE_STATEMENTS = {
+  EXPRESS: {
+    LAUNCH: {
+      ERROR: "An error occurred during express launch.",
+      SUCCESS: "Express initialized successfully. Status check URL: ",
+    },
+  },
+
   GRACEFUL_SHUTDOWN_START: "Gracefully going offline.",
 
   MONGOOSE: {
